@@ -696,10 +696,10 @@
 
 
         // 조명 추가
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // 부드러운 전체 조명
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.5); // 부드러운 전체 조명
         scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // 태양광과 유사
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5); // 태양광과 유사
         directionalLight.position.set(1, 1, 1); // 광원 방향
         scene.add(directionalLight);
 
