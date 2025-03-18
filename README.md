@@ -4,7 +4,8 @@
 [![GitHub Discussions](https://img.shields.io/github/discussions/NVIDIA-AI-IOT/jetbot)](https://github.com/NVIDIA-AI-IOT/jetbot/discussions)
 [![Jetson Forum](https://img.shields.io/badge/Forum-Jetson-green)](https://forums.developer.nvidia.com/c/agx-autonomous-machines/jetson-embedded-systems/70)
 
-[English](README.md) | [한국어](README_ko.md)
+ https://hwkims.github.io/jetbot.kr/3d.html
+ 
 
 JetBot은 NVIDIA Jetson Nano를 기반으로 하는 저렴하고 교육적이며 재미있는 오픈소스 AI 로봇 프로젝트입니다.
 
