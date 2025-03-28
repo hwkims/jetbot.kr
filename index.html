@@ -3,101 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JetBot 도로 주행 프로젝트 (3D 모델 포함)</title>
+    <title>🤖 JetBot 도로 주행 프로젝트 (3D 모델 포함)</title>
     <style>
+        /* --- 기본 스타일 --- */
         body {
-            font-family: sans-serif;
-            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #f8f9fa; /* 밝은 회색 배경 */
+            color: #343a40; /* 어두운 텍스트 색상 */
         }
 
         .container {
-            max-width: 960px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #ffffff; /* 흰색 배경 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+            border-radius: 8px; /* 모서리 둥글게 */
         }
 
-        h1, h2, h3 {
-            color: #0056b3; /* NVIDIA Green-ish Blue */
-            border-bottom: 2px solid #76b900; /* NVIDIA Green */
-            padding-bottom: 5px;
+        /* --- 제목 스타일 --- */
+        h1, h2, h3, h4 {
+            color: #0b3d91; /* 진한 파란색 (NVIDIA 느낌) */
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
         }
+        h1 { text-align: center; border-bottom: 3px solid #76b900; /* NVIDIA 녹색 강조 */}
+        h2 { border-bottom: 2px solid #76b900; margin-top: 2.5rem; }
+        h3 { border-bottom: 1px dashed #ced4da; margin-top: 2rem; }
+        h4 { color: #17a2b8; margin-top: 1.5rem; } /* 정보성 청록색 */
 
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
+        /* --- 코드 블록 --- */
         pre {
-            background-color: #eee;
+            background-color: #e9ecef; /* 코드 배경 */
             padding: 15px;
             border-radius: 5px;
             overflow-x: auto;
-            border: 1px solid #ddd;
+            border: 1px solid #dee2e6; /* 연한 테두리 */
+            font-size: 0.9em; /* 코드 폰트 약간 작게 */
         }
-
         code {
-            font-family: monospace;
-            background-color: #eee; /* Light background for inline code */
-            padding: 2px 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        /* 인라인 코드 */
+        :not(pre) > code {
+            background-color: #e9ecef;
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
             border-radius: 3px;
         }
 
-        pre code {
-            background-color: transparent; /* No extra background inside pre */
-            padding: 0;
-            border-radius: 0;
-        }
-
+        /* --- 기타 요소 --- */
         strong {
-            color: #555;
+            color: #28a745; /* 녹색 강조 */
         }
-
         ul, ol {
-            margin-left: 20px;
+            margin-left: 25px;
+            padding-left: 0;
         }
-
         li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+        }
+        a {
+            color: #007bff; /* 링크 파란색 */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #dee2e6;
+            margin: 40px 0;
+        }
+        .emoji { /* 이모지 스타일 (선택 사항) */
+            margin-right: 5px;
+            vertical-align: middle;
         }
 
+        /* --- 3D 뷰어 컨테이너 --- */
         #viewer-container {
             width: 100%;
-            height: 500px; /* Adjust height as needed */
-            margin: 20px 0;
-            border: 1px solid #ccc;
-            position: relative; /* Needed for potential overlays or loading indicators */
-            background-color: #e0e0e0; /* Light gray background for viewer */
+            height: 550px; /* 높이 증가 */
+            margin: 30px 0;
+            border: 1px solid #ced4da; /* 테두리 */
+            position: relative;
+            background-color: #f1f3f5; /* 뷰어 배경 */
+            border-radius: 5px;
+            overflow: hidden; /* 컨테이너 경계 유지 */
         }
-
-        /* Basic styling for loading indicator (optional) */
         #loading-indicator {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 1.2em;
-            color: #555;
+            font-size: 1.3em;
+            color: #495057;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
+        /* --- 섹션 구분 --- */
         .section {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
-        /* Responsive adjustments */
+        /* --- 반응형 디자인 --- */
         @media (max-width: 768px) {
             .container {
-                margin: 10px;
-                padding: 15px;
+                margin: 15px;
+                padding: 20px;
             }
             #viewer-container {
-                height: 400px;
+                height: 450px;
             }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
         }
 
     </style>
@@ -105,153 +136,179 @@
 <body>
     <div class="container">
 
-        <h1>JetBot 도로 주행 프로젝트: 데이터 수집부터 실시간 데모까지 (TensorRT 최적화 및 3D 모델)</h1>
+        <h1><span class="emoji">🤖</span> JetBot 도로 주행 프로젝트: 데이터 수집부터 실시간 데모까지</h1>
+        <p style="text-align: center; font-size: 1.1em; color: #6c757d;">TensorRT 최적화 및インタラクティブ 3D 모델 뷰어를 포함한 전체 가이드</p>
+
+        <hr>
 
         <div class="section">
-            <h2>JetBot 3D 모델 뷰어</h2>
-            <p>아래 뷰어에서 JetBot의 3D 모델을 확인하세요. 마우스를 사용하여 회전, 확대/축소, 이동할 수 있습니다.</p>
+            <h2><span class="emoji">✨</span> JetBot 3D 모델 뷰어</h2>
+            <p>아래 뷰어에서 JetBot의 3D 모델을 직접 살펴보세요! 마우스를 사용하여 <strong>회전</strong>(왼쪽 버튼 클릭+드래그), <strong>확대/축소</strong>(휠 스크롤), <strong>이동</strong>(오른쪽 버튼 클릭+드래그 또는 Ctrl/Cmd+왼쪽 버튼 클릭+드래그)할 수 있습니다.</p>
             <div id="viewer-container">
-                <div id="loading-indicator">모델 로딩 중...</div>
+                <div id="loading-indicator">⏳ 모델 로딩 중... 잠시만 기다려주세요!</div>
             </div>
-             <p><em>(모델: jetbot.glb, 출처: NVIDIA JetBot 프로젝트)</em></p>
+             <p><em>💡 모델 파일: <code>jetbot.glb</code> (이 HTML 파일과 같은 폴더에 있어야 합니다.)</em></p>
         </div>
+
+        <hr>
 
         <div class="section" id="project-overview">
-            <h2>1. 프로젝트 개요</h2>
-            <p>본 문서는 NVIDIA JetBot을 사용하여 카메라 이미지를 기반으로 도로(트랙)를 따라 자율적으로 주행하는 프로젝트의 전체 과정을 설명합니다. 이 프로젝트는 다음 단계로 구성됩니다.</p>
+            <h2><span class="emoji">🎯</span> 1. 프로젝트 개요</h2>
+            <p>이 문서는 NVIDIA JetBot을 사용하여 카메라 이미지를 분석하고, 이를 기반으로 도로(또는 지정된 트랙)를 따라 자율적으로 주행하는 프로젝트의 전 과정을 상세히 안내합니다. 복잡해 보일 수 있지만, 차근차근 따라오시면 JetBot이 스스로 길을 찾는 놀라운 경험을 하실 수 있습니다! 😉</p>
+            <p>프로젝트는 크게 네 단계로 진행됩니다:</p>
             <ol>
-                <li><strong>데이터 수집:</strong> JetBot의 카메라를 이용하여 주행 경로 이미지를 수집하고, 각 이미지에서 로봇이 나아가야 할 목표 지점(x, y 좌표)을 라벨링합니다.</li>
-                <li><strong>모델 학습:</strong> 수집된 데이터를 사용하여 이미지로부터 목표 지점의 (x, y) 좌표를 예측하는 딥러닝 회귀 모델(ResNet-18 기반)을 학습시킵니다.</li>
-                <li><strong>TensorRT 최적화:</strong> 학습된 PyTorch 모델을 TensorRT를 사용하여 최적화하여 JetBot과 같은 엣지 디바이스에서 더 빠른 추론 속도를 확보합니다.</li>
-                <li><strong>실시간 데모:</strong> 최적화된 모델을 JetBot에 배포하여 실시간 카메라 입력을 통해 도로 주행을 수행합니다.</li>
+                <li><strong><span class="emoji">📸</span> 데이터 수집:</strong> JetBot의 눈(카메라)으로 세상을 보고, 어디로 가야 할지 알려주는 데이터를 만듭니다.</li>
+                <li><strong><span class="emoji">🧠</span> 모델 학습:</strong> 수집한 데이터를 인공지능(딥러닝 모델)에게 학습시켜, 이미지 속에서 목표 지점을 스스로 찾도록 훈련시킵니다.</li>
+                <li><strong><span class="emoji">⚡</span> TensorRT 최적화:</strong> 학습된 모델을 JetBot 위에서 번개처럼 빠르게 실행될 수 있도록 변환하고 최적화합니다.</li>
+                <li><strong><span class="emoji">🚀</span> 실시간 데모:</strong> 최적화된 모델을 JetBot에 탑재하여, 실시간 카메라 영상을 보며 스스로 도로를 따라 주행하는 마법을 구현합니다!</li>
             </ol>
         </div>
+
+        <hr>
 
         <div class="section" id="data-collection">
-            <h2>2. 데이터 수집 (Data Collection)</h2>
-            <p>도로 주행 모델을 학습시키기 위한 첫 단계는 JetBot이 실제 주행할 환경에서 데이터를 수집하는 것입니다.</p>
+            <h2><span class="emoji">📸</span> 2. 데이터 수집 (Data Collection)</h2>
+            <p>인공지능 모델을 학습시키려면 '교과서', 즉 데이터가 필요합니다. 이 단계에서는 JetBot이 주행할 환경(예: 직접 만든 트랙)에서 JetBot의 시선으로 이미지를 촬영하고, 각 이미지마다 "이쪽으로 가야 해!"라고 알려주는 목표 지점을 표시(라벨링)합니다.</p>
 
-            <h3>2.1. 목표</h3>
+            <h3><span class="emoji">⭐</span> 2.1. 목표</h3>
             <ul>
-                <li>JetBot의 카메라로 트랙 이미지를 캡처합니다.</li>
-                <li>각 이미지에서 로봇이 향해야 할 목표 지점의 (x, y) 픽셀 좌표를 기록합니다.</li>
-                <li>다양한 위치와 각도에서 데이터를 수집하여 모델의 강건성(Robustness)을 높입니다.</li>
+                <li>JetBot의 카메라(<span class="emoji">📷</span>)를 사용하여 주행 경로 이미지를 캡처합니다.</li>
+                <li>각 이미지에서 로봇이 나아가야 할 가장 적절한 목표 지점의 (x, y) 픽셀 좌표를 클릭하여 기록합니다.</li>
+                <li><span class="emoji">💡</span> <strong>핵심:</strong> 다양한 상황(다른 위치, 각도, 조명 조건)에서 데이터를 수집해야 모델이 실제 주행 시 예상치 못한 상황에도 잘 대처할 수 있습니다 (강건성 확보!). 최소 수백 장의 이미지를 목표로 하는 것이 좋습니다.</li>
             </ul>
 
-            <h3>2.2. 데이터 라벨링 가이드</h3>
+            <h3><span class="emoji">🗺️</span> 2.2. 데이터 라벨링 가이드: 어디를 찍어야 할까?</h3>
+            <p>정확한 라벨링은 모델 성능에 매우 중요합니다. 다음 가이드라인을 따라 목표 지점을 신중하게 선택하세요:</p>
             <ol>
-                <li>카메라의 실시간 피드를 관찰합니다.</li>
-                <li>로봇이 따라가야 할 경로를 상상합니다 (트랙 중앙 또는 특정 라인).</li>
-                <li>로봇이 해당 지점으로 직진했을 때 경로를 벗어나지 않을 <strong>가장 먼 지점</strong>을 선택하여 클릭합니다.
+                <li><strong>실시간 영상 확인:</strong> Jupyter Lab에 표시되는 JetBot의 실시간 카메라 피드를 주의 깊게 관찰합니다.</li>
+                <li><strong>주행 경로 상상:</strong> 로봇이 트랙 중앙 또는 특정 라인을 따라 부드럽게 나아가야 할 이상적인 경로를 머릿속으로 그립니다.</li>
+                <li><strong>"당근" 지점 선택:</strong> 마치 로봇 앞에 매달린 당근처럼, 로봇이 그 지점을 향해 <strong>직진해도 경로를 벗어나지 않을 가장 먼 지점</strong>을 클릭합니다.
                     <ul>
-                        <li>직선 경로에서는 멀리 있는 지점을 선택할 수 있습니다.</li>
-                        <li>급격한 커브에서는 로봇이 경로를 벗어나지 않도록 더 가까운 지점을 선택해야 합니다.</li>
+                        <li><strong>직선 도로:</strong> 가능한 멀리, 도로가 끝나는 지평선 근처를 선택할 수 있습니다.</li>
+                        <li><strong>급격한 커브:</strong> 로봇이 커브를 안전하게 돌 수 있도록, 경로 안쪽의 비교적 가까운 지점을 선택해야 합니다. 너무 먼 곳을 찍으면 로봇이 경로를 이탈할 수 있습니다! <span class="emoji">⚠️</span></li>
                     </ul>
                 </li>
+                <li><strong>꾸준함이 중요:</strong> 일관된 기준으로 여러 위치와 각도에서 반복적으로 데이터를 수집합니다.</li>
             </ol>
 
-            <h3>2.3. 구현 코드 (데이터 수집 위젯 설정)</h3>
-            <p>필요한 라이브러리를 가져오고 카메라 및 위젯을 설정합니다. <code>jupyter_clickable_image_widget</code>을 사용하여 이미지 위에 직접 클릭하여 좌표를 얻습니다.</p>
+            <h3><span class="emoji">💻</span> 2.3. 구현 코드 (데이터 수집 위젯 설정)</h3>
+            <p>Jupyter Lab에서 실행되는 Python 코드입니다. 필요한 라이브러리를 가져오고, 카메라를 켜고, 이미지를 클릭하여 (x, y) 좌표와 함께 저장하는 위젯을 설정합니다.</p>
             <pre><code class="language-python">
-# IPython Libraries for display and widgets
+# 필요한 라이브러리들을 불러옵니다
 import ipywidgets
 import traitlets
-import ipywidgets.widgets as widgets
 from IPython.display import display
-
-# Camera and Motor Interface for JetBot
-from jetbot import Robot, Camera, bgr8_to_jpeg
-
-# Basic Python packages for image annotation
-from uuid import uuid1
+from jetbot import Robot, Camera, bgr8_to_jpeg # JetBot 제어용
+from uuid import uuid1 # 고유 파일명 생성용
 import os
-import json
 import glob
-import datetime
-import numpy as np
-import cv2
+import cv2 # 이미지 처리용
 import time
+from jupyter_clickable_image_widget import ClickableImageWidget # 클릭 가능한 이미지 위젯
 
-# Clickable image widget
-from jupyter_clickable_image_widget import ClickableImageWidget
-
-# 데이터셋 저장 디렉토리
+# 데이터셋을 저장할 디렉토리 이름
 DATASET_DIR = 'dataset_xy'
 
-# 디렉토리 생성 (이미 존재하면 오류 무시)
+# 디렉토리가 없으면 새로 만듭니다 (이미 있으면 넘어갑니다)
 try:
     os.makedirs(DATASET_DIR)
+    print(f"'{DATASET_DIR}' 디렉토리를 생성했습니다.")
 except FileExistsError:
-    print('디렉토리가 이미 존재하여 새로 생성하지 않았습니다.')
+    print(f"'{DATASET_DIR}' 디렉토리가 이미 존재합니다.")
 
-# 카메라 초기화 (모델 입력 크기에 맞춰 224x224 설정)
+# 카메라 객체를 생성합니다 (모델 입력 크기에 맞게 224x224 설정)
 camera = Camera(width=224, height=224)
 
-# 이미지 위젯 생성 (클릭 가능)
+# 클릭 가능한 라이브 카메라 이미지 위젯 생성
 camera_widget = ClickableImageWidget(width=camera.width, height=camera.height)
-# 마지막 저장된 스냅샷 표시용 위젯
+# 방금 저장한 스냅샷을 보여줄 이미지 위젯 생성
 snapshot_widget = ipywidgets.Image(width=camera.width, height=camera.height)
-# 카메라 출력을 camera_widget에 연결 (BGR -> JPEG 변환)
+
+# 카메라의 실시간 영상('value')을 camera_widget에 연결합니다.
+# bgr8_to_jpeg 함수를 통해 BGR 형식의 이미지를 웹에서 볼 수 있는 JPEG 형식으로 변환합니다.
 traitlets.dlink((camera, 'value'), (camera_widget, 'value'), transform=bgr8_to_jpeg)
 
-# 저장된 이미지 개수 표시 위젯
-count_widget = ipywidgets.IntText(description='count')
-# 초기 이미지 개수 업데이트
+# 저장된 이미지 개수를 보여줄 텍스트 위젯 생성
+count_widget = ipywidgets.IntText(description='저장된 이미지:', value=0, disabled=True)
+
+# 프로그램 시작 시 저장된 이미지 개수를 세어서 업데이트합니다
 count_widget.value = len(glob.glob(os.path.join(DATASET_DIR, '*.jpg')))
 
-# 이미지 클릭 시 실행될 콜백 함수
+# camera_widget (라이브 영상)를 클릭했을 때 실행될 함수 정의
 def save_snapshot(_, content, msg):
+    # 클릭 이벤트일 때만 처리
     if content['event'] == 'click':
         data = content['eventData']
-        x = data['offsetX'] # 클릭된 x 좌표
-        y = data['offsetY'] # 클릭된 y 좌표
+        x = data['offsetX'] # 클릭된 x 좌표 (이미지 내)
+        y = data['offsetY'] # 클릭된 y 좌표 (이미지 내)
 
-        # 이미지를 디스크에 저장
-        # 파일명 형식: xy_<x좌표>_<y좌표>_<uuid>.jpg
+        # 고유한 파일명을 만듭니다: xy_x좌표_y좌표_고유ID.jpg
         uuid_str = str(uuid1())
-        image_path = os.path.join(DATASET_DIR, f'xy_{x:03d}_{y:03d}_{uuid_str}.jpg')
-        with open(image_path, 'wb') as f:
-            f.write(camera_widget.value) # JPEG 형식으로 저장
+        filename = f'xy_{x:03d}_{y:03d}_{uuid_str}.jpg' # x,y 좌표는 3자리 숫자로 포맷팅
+        image_path = os.path.join(DATASET_DIR, filename)
 
-        # 저장된 스냅샷 미리보기 (클릭 지점에 녹색 원 표시)
-        snapshot = camera.value.copy() # 현재 카메라 프레임 복사 (BGR 형식)
-        snapshot = cv2.circle(snapshot, (x, y), 8, (0, 255, 0), 3) # 원 그리기
+        # 현재 카메라 위젯의 이미지(JPEG 형식)를 파일로 저장합니다
+        with open(image_path, 'wb') as f:
+            f.write(camera_widget.value)
+
+        # 방금 저장한 스냅샷에 녹색 원을 그려서 보여줍니다
+        snapshot = camera.value.copy() # 현재 카메라 프레임(BGR) 복사
+        cv2.circle(snapshot, (x, y), 8, (0, 255, 0), 3) # (x, y)에 녹색 원 그리기
         snapshot_widget.value = bgr8_to_jpeg(snapshot) # JPEG로 변환하여 위젯에 표시
 
-        # 이미지 개수 업데이트
+        # 이미지 개수 텍스트 위젯 업데이트
         count_widget.value = len(glob.glob(os.path.join(DATASET_DIR, '*.jpg')))
 
-# camera_widget에서 클릭 이벤트 발생 시 save_snapshot 함수 호출
+# camera_widget에서 메시지(클릭 포함)가 발생하면 save_snapshot 함수를 호출하도록 등록
 camera_widget.on_msg(save_snapshot)
 
-# 위젯들을 VBox로 묶어 표시
+# 위젯들을 보기 좋게 배치합니다 (수직/수평 박스 사용)
 data_collection_widget = ipywidgets.VBox([
-    ipywidgets.HBox([camera_widget, snapshot_widget]), # 카메라 피드와 스냅샷
-    count_widget # 이미지 개수
+    ipywidgets.HTML("<h3><span class='emoji'>🖱️</span> 이미지 클릭하여 데이터 저장</h3>"),
+    ipywidgets.HBox([camera_widget, snapshot_widget]), # 라이브 영상과 스냅샷을 나란히 표시
+    count_widget # 저장된 이미지 개수 표시
 ])
 
-# 데이터 수집 위젯 표시
+# 최종적으로 구성된 위젯을 화면에 표시합니다
 display(data_collection_widget)
+print("카메라 준비 완료! 라이브 이미지를 클릭하여 데이터를 저장하세요.")
             </code></pre>
 
-            <h3>2.4. 데이터 확인</h3>
-            <p>수집 후 <code>dataset_xy</code> 폴더에는 <code>xy_<x>_<y>_<uuid>.jpg</code> 형식의 파일들이 저장됩니다. 파일명에 포함된 x, y 좌표는 이후 모델 학습 시 라벨로 사용됩니다.</p>
+            <h3><span class="emoji">📂</span> 2.4. 데이터 확인</h3>
+            <p>데이터 수집을 마치면, Jupyter Lab의 파일 탐색기에서 <code>dataset_xy</code> 폴더를 확인하세요. 그 안에 <code>xy_<x>_<y>_<uuid>.jpg</code> 형식의 파일들이 가득 차 있을 것입니다. 파일명에 포함된 <code><x></code>와 <code><y></code> 좌표가 바로 우리가 힘들게 찍은 라벨 정보이며, 다음 단계에서 모델 학습에 사용됩니다.</p>
         </div>
 
-        <div class="section" id="model-training">
-            <h2>3. 모델 학습 (Train Model)</h2>
-            <p>수집된 데이터를 이용하여 도로 주행을 위한 딥러닝 모델을 학습시킵니다.</p>
+        <hr>
 
-            <h3>3.1. 목표</h3>
+        <div class="section" id="model-training">
+            <h2><span class="emoji">🧠</span> 3. 모델 학습 (Train Model)</h2>
+            <p>이제 수집한 데이터를 이용해 JetBot의 '뇌'에 해당하는 딥러닝 모델을 학습시킬 차례입니다. 목표는 이미지를 입력받았을 때, 우리가 라벨링했던 목표 지점의 (x, y) 좌표를 정확하게 예측하도록 만드는 것입니다. 여기서는 <strong>회귀(Regression)</strong> 문제를 푸는 것입니다.</p>
+
+            <h3><span class="emoji">⭐</span> 3.1. 목표</h3>
             <ul>
-                <li>입력 이미지로부터 목표 지점의 정규화된 (x, y) 좌표를 예측하는 회귀 모델을 학습합니다.</li>
-                <li>PyTorch 프레임워크와 ResNet-18 아키텍처(전이 학습 활용)를 사용합니다.</li>
+                <li>입력 이미지(224x224)로부터 목표 지점의 정규화된 (x, y) 좌표 [-1, 1] 범위를 예측하는 회귀 모델을 학습합니다.</li>
+                <li>강력한 이미지 인식 성능으로 유명한 <strong>ResNet-18</strong> 아키텍처를 사용합니다.</li>
+                <li><strong>전이 학습(Transfer Learning)</strong> 기법을 활용합니다: 이미 수백만 장의 이미지로 학습된 ResNet-18 모델을 가져와, 우리의 도로 주행 문제에 맞게 마지막 부분만 살짝 수정하여 학습합니다. 이렇게 하면 적은 데이터로도 좋은 성능을 얻을 수 있습니다! <span class="emoji">🎓</span></li>
+                <li>PyTorch 딥러닝 프레임워크를 사용합니다.</li>
             </ul>
 
-            <h3>3.2. 데이터셋 준비</h3>
+            <h3><span class="emoji">🛠️</span> 3.2. 데이터셋 준비</h3>
 
             <h4>3.2.1. 커스텀 데이터셋 클래스 (<code>XYDataset</code>)</h4>
-            <p>이미지를 로드하고 파일명에서 x, y 좌표를 파싱하며, 필요한 전처리(크기 조정, 텐서 변환, 정규화) 및 데이터 증강(Color Jitter, Random Horizontal Flip)을 수행하는 <code>Dataset</code> 클래스를 정의합니다.</p>
+            <p>PyTorch의 <code>Dataset</code> 클래스를 상속받아 우리 데이터에 맞는 커스텀 데이터셋 클래스를 만듭니다. 이 클래스는 다음 역할을 합니다:</p>
+            <ul>
+                <li>지정된 디렉토리에서 이미지 파일 목록을 가져옵니다.</li>
+                <li>이미지 파일을 로드합니다.</li>
+                <li>파일명에서 x, y 좌표를 추출하고, [-1, 1] 범위로 <strong>정규화</strong>합니다. 모델이 학습하기 쉬운 형태로 만들어주는 과정입니다.</li>
+                <li><strong>데이터 증강(Data Augmentation)</strong>을 적용합니다 (선택 사항):
+                    <ul>
+                        <li><code>ColorJitter</code>: 이미지의 밝기, 대비, 채도 등을 무작위로 약간씩 변경하여 모델이 다양한 조명 조건에 강해지도록 합니다.</li>
+                        <li><code>Random Horizontal Flip</code>: 이미지를 무작위로 좌우 반전시킵니다. 만약 트랙이 대칭적이라면, 데이터 양을 두 배로 늘리는 효과를 줄 수 있습니다. (좌우 반전 시 x 좌표의 부호도 바꿔줘야 합니다!)</li>
+                    </ul>
+                </li>
+                <li>이미지 크기를 모델 입력에 맞게 224x224로 조절합니다.</li>
+                <li>이미지를 PyTorch 텐서(Tensor) 형식으로 변환하고, ImageNet 데이터셋의 평균과 표준편차로 <strong>정규화</strong>합니다. (사전 학습된 모델을 사용하기 때문에 동일한 정규화 방식을 따르는 것이 중요합니다.)</li>
+            </ul>
             <pre><code class="language-python">
 import torch
 import torch.optim as optim
@@ -265,487 +322,611 @@ import PIL.Image
 import os
 import numpy as np
 
-# 파일명에서 x 좌표 추출 및 정규화 (-1 ~ 1 범위)
+# 파일 경로에서 x 좌표를 추출하고 [-1, 1] 범위로 정규화하는 함수
 def get_x(path, width):
-    """Gets the x value from the image filename"""
-    return (float(int(path.split("_")[1])) - width/2) / (width/2)
+    """이미지 파일명에서 x 값을 추출합니다."""
+    # 파일명 예시: 'xy_112_150_uuid.jpg'
+    x_pixel = float(int(os.path.basename(path).split('_')[1]))
+    # 픽셀 좌표를 [-1, 1] 범위로 변환 (이미지 중앙이 0)
+    return (x_pixel - width / 2) / (width / 2)
 
-# 파일명에서 y 좌표 추출 및 정규화 (-1 ~ 1 범위)
+# 파일 경로에서 y 좌표를 추출하고 [-1, 1] 범위로 정규화하는 함수
 def get_y(path, height):
-    """Gets the y value from the image filename"""
-    return (float(int(path.split("_")[2])) - height/2) / (height/2)
+    """이미지 파일명에서 y 값을 추출합니다."""
+    y_pixel = float(int(os.path.basename(path).split('_')[2]))
+    # 픽셀 좌표를 [-1, 1] 범위로 변환 (이미지 중앙이 0)
+    # 참고: 이미지 좌표계는 위쪽이 0, 아래쪽이 height입니다.
+    # 따라서 정규화된 y값은 위쪽이 -1, 아래쪽이 1에 가까워집니다.
+    return (y_pixel - height / 2) / (height / 2)
 
+# PyTorch Dataset 클래스를 상속받아 커스텀 데이터셋 정의
 class XYDataset(torch.utils.data.Dataset):
     def __init__(self, directory, random_hflips=False):
         self.directory = directory
-        self.random_hflips = random_hflips
+        self.random_hflips = random_hflips # 좌우 반전 증강 사용 여부
+        # 디렉토리 내 모든 .jpg 파일 경로를 가져옵니다.
         self.image_paths = glob.glob(os.path.join(self.directory, '*.jpg'))
-        # 데이터 증강을 위한 Color Jitter 설정
+        # 데이터 증강: 색상 변형 설정 (밝기, 대비, 채도, 색조)
         self.color_jitter = transforms.ColorJitter(0.3, 0.3, 0.3, 0.3)
 
+        # 데이터 전처리를 위한 Transform 정의
+        self.transform = transforms.Compose([
+            transforms.Resize((224, 224)), # 이미지 크기 224x224로 조정
+            transforms.ToTensor(), # 이미지를 PyTorch Tensor로 변환 ([0, 1] 범위)
+            # ImageNet 평균/표준편차로 정규화
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        ])
+
     def __len__(self):
+        # 데이터셋의 총 이미지 개수 반환
         return len(self.image_paths)
 
     def __getitem__(self, idx):
+        # 주어진 인덱스(idx)에 해당하는 이미지 경로 가져오기
         image_path = self.image_paths[idx]
 
-        # 이미지 로드
-        image = PIL.Image.open(image_path)
+        # PIL 라이브러리를 사용하여 이미지 열기 (RGB 형식)
+        image = PIL.Image.open(image_path).convert('RGB')
         width, height = image.size
+
         # 파일명에서 x, y 좌표 추출 및 정규화
-        x = float(get_x(os.path.basename(image_path), width))
-        y = float(get_y(os.path.basename(image_path), height))
+        x = float(get_x(image_path, width))
+        y = float(get_y(image_path, height))
 
-        # Random Horizontal Flip (데이터 증강)
-        if self.random_hflips and float(np.random.rand(1)) > 0.5:
+        # 데이터 증강: Random Horizontal Flip (좌우 반전)
+        if self.random_hflips and np.random.rand() > 0.5:
             image = transforms.functional.hflip(image)
-            x = -x # x 좌표 반전
+            x = -x # 좌우 반전 시 x 좌표 부호 변경
 
-        # 데이터 증강: Color Jitter
+        # 데이터 증강: Color Jitter (색상 변형)
         image = self.color_jitter(image)
-        # 이미지 크기 조정 (ResNet 입력 크기)
-        image = transforms.functional.resize(image, (224, 224))
-        # 이미지를 Tensor로 변환
-        image = transforms.functional.to_tensor(image)
-        # OpenCV (BGR) 순서로 변경 (선택 사항, 원본 코드 기준)
-        # image = image.numpy()[::-1].copy()
-        # image = torch.from_numpy(image)
-        # 이미지 정규화 (ImageNet 평균 및 표준편차 사용)
-        image = transforms.functional.normalize(image, [0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 
-        # 이미지와 라벨(x, y 좌표) 반환
+        # 정의된 Transform 적용 (크기 조정, Tensor 변환, 정규화)
+        image = self.transform(image)
+
+        # 이미지 텐서와 좌표 텐서([x, y]) 반환
         return image, torch.tensor([x, y]).float()
 
-# 데이터셋 인스턴스 생성
-dataset = XYDataset('dataset_xy', random_hflips=False) # 필요시 random_hflips=True 설정
+# 데이터셋 인스턴스 생성 (좌우 반전은 사용하지 않음)
+dataset = XYDataset(DATASET_DIR, random_hflips=False)
+print(f"데이터셋 로드 완료! 총 이미지 개수: {len(dataset)}")
             </code></pre>
 
             <h4>3.2.2. 데이터 분할 및 로더 생성</h4>
-            <p>데이터셋을 훈련(Train) 세트와 테스트(Test) 세트로 분할하고, 배치(Batch) 단위로 데이터를 로드하는 <code>DataLoader</code>를 생성합니다.</p>
+            <p>전체 데이터셋을 <strong>훈련(Train) 세트</strong>와 <strong>테스트(Test) 세트</strong>로 나눕니다. 보통 80:20 또는 90:10 비율을 사용합니다. 모델은 훈련 세트로 학습하고, 테스트 세트로는 학습 중에 모델 성능을 객관적으로 평가하는 데 사용합니다.</p>
+            <p><code>DataLoader</code>는 데이터를 미니배치(minibatch) 단위로 묶어주고, 데이터를 섞어주며(shuffling), 병렬 처리(multi-processing)를 가능하게 하여 학습 효율을 높여줍니다.</p>
              <pre><code class="language-python">
 # 테스트 데이터 비율 설정 (예: 10%)
 test_percent = 0.1
-num_test = int(test_percent * len(dataset))
-num_train = len(dataset) - num_test
+num_total = len(dataset)
+num_test = int(test_percent * num_total)
+num_train = num_total - num_test
 
-# 데이터셋 분할
+print(f"데이터 분할: 훈련 데이터 {num_train}개, 테스트 데이터 {num_test}개")
+
+# 데이터셋을 훈련 세트와 테스트 세트로 무작위 분할
 train_dataset, test_dataset = torch.utils.data.random_split(dataset, [num_train, num_test])
 
-# 데이터 로더 생성
-BATCH_SIZE = 8 # GPU 메모리에 따라 조절
+# 데이터 로더(DataLoader) 생성
+BATCH_SIZE = 8 # 미니배치 크기 (Jetson Nano의 GPU 메모리에 따라 조절 필요)
+# 훈련 데이터 로더 (데이터 섞기 활성화)
 train_loader = torch.utils.data.DataLoader(
     train_dataset,
     batch_size=BATCH_SIZE,
-    shuffle=True, # 훈련 데이터는 섞음
-    num_workers=0 # Jetson Nano에서는 0 권장
+    shuffle=True,
+    num_workers=0 # Jetson에서는 0으로 설정하는 것이 안정적일 수 있음
 )
-
+# 테스트 데이터 로더 (데이터 섞기 비활성화)
 test_loader = torch.utils.data.DataLoader(
     test_dataset,
     batch_size=BATCH_SIZE,
-    shuffle=False, # 테스트 데이터는 섞지 않음
+    shuffle=False,
     num_workers=0
 )
+print(f"데이터 로더 생성 완료! 배치 크기: {BATCH_SIZE}")
             </code></pre>
 
-            <h3>3.3. 모델 정의 (ResNet-18)</h3>
-            <p>ImageNet으로 사전 학습된 ResNet-18 모델을 로드하고, 마지막 Fully Connected Layer (fc)를 교체하여 (x, y) 좌표 2개를 출력하도록 수정합니다.</p>
+            <h3><span class="emoji">🏗️</span> 3.3. 모델 정의 (ResNet-18)</h3>
+            <p>사전 학습된 ResNet-18 모델을 불러옵니다. ResNet-18은 이미지 분류 문제에서 뛰어난 성능을 보인 모델 구조입니다. 우리는 이 모델의 마지막 출력 레이어(Fully Connected Layer)만 교체하여, 이미지 분류(예: 1000개 클래스) 대신 우리의 목표인 (x, y) 좌표 2개를 출력하도록 만듭니다.</p>
             <pre><code class="language-python">
-# 사전 학습된 ResNet-18 모델 로드
+# ImageNet 데이터로 사전 학습된 ResNet-18 모델 불러오기
 model = models.resnet18(pretrained=True)
 
-# 마지막 FC 레이어 교체 (출력 크기를 2로 설정: x, y 좌표)
-model.fc = torch.nn.Linear(512, 2)
+# ResNet-18의 마지막 Fully Connected Layer(fc) 확인 (기본 출력: 1000개)
+# print(model.fc)
 
-# 모델을 GPU로 이동
+# 마지막 FC 레이어를 새로운 레이어로 교체합니다.
+# 입력 특징(in_features)은 ResNet-18의 마지막 특징 맵 크기(512)와 동일하게 유지하고,
+# 출력 특징(out_features)은 우리가 예측하려는 값의 개수(x, y 좌표 2개)로 설정합니다.
+num_output_features = 2
+model.fc = torch.nn.Linear(model.fc.in_features, num_output_features)
+
+# 모델을 GPU로 이동시킵니다 (Jetson Nano에는 GPU가 있습니다!)
 device = torch.device('cuda')
 model = model.to(device)
+
+print("ResNet-18 모델 정의 및 출력 레이어 수정 완료!")
+# print(model) # 모델 구조 확인 (선택 사항)
             </code></pre>
 
-            <h3>3.4. 모델 학습</h3>
-            <p>Adam 옵티마이저와 Mean Squared Error (MSE) 손실 함수를 사용하여 모델을 학습시킵니다. 각 에포크마다 훈련 및 테스트 손실을 계산하고, 테스트 손실이 가장 낮은 모델을 저장합니다.</p>
+            <h3><span class="emoji">🏋️</span> 3.4. 모델 학습</h3>
+            <p>이제 모델을 본격적으로 학습시킬 시간입니다! 학습 과정을 요약하면 다음과 같습니다:</p>
+            <ol>
+                <li><strong>에포크(Epoch) 반복:</strong> 전체 훈련 데이터를 모두 사용하는 과정을 1 에포크라고 하며, 이 과정을 여러 번 반복합니다(예: 30~70 에포크).</li>
+                <li><strong>미니배치(Minibatch) 학습:</strong> 각 에포크 내에서 훈련 데이터를 미니배치 단위로 나누어 처리합니다.
+                    <ul>
+                        <li>모델이 미니배치 이미지를 보고 (x, y) 좌표를 예측합니다.</li>
+                        <li>예측값과 실제 라벨(정답 좌표) 사이의 오차(손실, Loss)를 계산합니다. 회귀 문제에서는 주로 <strong>평균 제곱 오차(Mean Squared Error, MSE)</strong>를 사용합니다.</li>
+                        <li>계산된 손실을 바탕으로 모델의 가중치(파라미터)를 어느 방향으로 얼마나 업데이트해야 오차를 줄일 수 있는지 계산합니다 (역전파, Backpropagation).</li>
+                        <li><strong>옵티마이저(Optimizer)</strong> (예: Adam)를 사용하여 계산된 방향으로 모델 가중치를 업데이트합니다.</li>
+                    </ul>
+                </li>
+                <li><strong>성능 평가:</strong> 각 에포크가 끝날 때마다 테스트 세트를 사용하여 현재 모델의 성능(테스트 손실)을 평가합니다. 이 평가는 모델이 학습 데이터에만 과적합(overfitting)되지 않았는지 확인하는 데 중요합니다.</li>
+                <li><strong>최고 모델 저장:</strong> 테스트 손실이 이전에 기록된 최고 성능(가장 낮은 손실)보다 좋을 때마다, 현재 모델의 가중치를 파일(<code>best_steering_model_xy.pth</code>)로 저장합니다.</li>
+            </ol>
             <pre><code class="language-python">
 # 학습 파라미터 설정
-NUM_EPOCHS = 70 # 총 에포크 수
-BEST_MODEL_PATH = 'best_steering_model_xy.pth' # 최고 성능 모델 저장 경로
-best_loss = 1e9 # 최고 성능(최저 손실) 기록 변수
+NUM_EPOCHS = 70 # 총 학습 에포크 수 (데이터 양과 모델 복잡도에 따라 조절)
+BEST_MODEL_PATH = 'best_steering_model_xy.pth' # 최고 성능 모델 가중치 저장 경로
+best_loss = float('inf') # 최고 성능(최저 테스트 손실) 기록 변수 (초기값: 무한대)
 
-# 옵티마이저 정의 (Adam 사용)
+# 옵티마이저 정의 (Adam 사용, 학습률 기본값 사용)
+# model.parameters()는 모델 내에서 학습 가능한 모든 가중치를 옵티마이저에게 알려줍니다.
 optimizer = optim.Adam(model.parameters())
 
-# 학습 루프
+print(f"모델 학습 시작! 총 에포크: {NUM_EPOCHS}")
+
+# 학습 루프 (지정된 에포크 수만큼 반복)
 for epoch in range(NUM_EPOCHS):
-    # 훈련 모드
-    model.train()
-    train_loss = 0.0
-    for images, labels in iter(train_loader):
+    # --- 훈련 단계 ---
+    model.train() # 모델을 훈련 모드로 설정 (Dropout 등 활성화)
+    train_loss = 0.0 # 현재 에포크의 훈련 손실 누적 변수
+
+    # 훈련 데이터 로더에서 미니배치 단위로 데이터 가져오기
+    for images, labels in train_loader:
         # 데이터를 GPU로 이동
         images = images.to(device)
         labels = labels.to(device)
-        # 옵티마이저 그래디언트 초기화
-        optimizer.zero_grad()
-        # 모델 예측
-        outputs = model(images)
-        # 손실 계산 (MSE Loss)
-        loss = F.mse_loss(outputs, labels)
-        # 훈련 손실 누적
-        train_loss += loss.item()
-        # 역전파
-        loss.backward()
-        # 옵티마이저 스텝 (가중치 업데이트)
-        optimizer.step()
-    # 평균 훈련 손실 계산
-    train_loss /= len(train_loader)
 
-    # 평가 모드
-    model.eval()
-    test_loss = 0.0
-    with torch.no_grad(): # 그래디언트 계산 비활성화
-        for images, labels in iter(test_loader):
+        # 옵티마이저의 기울기(gradient) 초기화
+        optimizer.zero_grad()
+
+        # 모델 예측 수행
+        outputs = model(images)
+
+        # 손실 계산 (MSE Loss 사용)
+        loss = F.mse_loss(outputs, labels)
+
+        # 역전파 수행 (손실에 대한 각 가중치의 기울기 계산)
+        loss.backward()
+
+        # 옵티마이저 스텝 (계산된 기울기를 바탕으로 가중치 업데이트)
+        optimizer.step()
+
+        # 현재 미니배치의 손실을 누적 (loss.item()은 텐서에서 숫자 값만 추출)
+        train_loss += loss.item()
+
+    # 평균 훈련 손실 계산
+    avg_train_loss = train_loss / len(train_loader)
+
+    # --- 평가 단계 ---
+    model.eval() # 모델을 평가 모드로 설정 (Dropout 등 비활성화)
+    test_loss = 0.0 # 현재 에포크의 테스트 손실 누적 변수
+    with torch.no_grad(): # 평가 시에는 기울기 계산이 필요 없으므로 비활성화 (메모리 절약, 속도 향상)
+        # 테스트 데이터 로더에서 미니배치 단위로 데이터 가져오기
+        for images, labels in test_loader:
             # 데이터를 GPU로 이동
             images = images.to(device)
             labels = labels.to(device)
-            # 모델 예측
+
+            # 모델 예측 수행
             outputs = model(images)
+
             # 손실 계산
             loss = F.mse_loss(outputs, labels)
-            # 테스트 손실 누적
+
+            # 현재 미니배치의 손실 누적
             test_loss += loss.item()
+
     # 평균 테스트 손실 계산
-    test_loss /= len(test_loader)
+    avg_test_loss = test_loss / len(test_loader)
 
-    # 에포크별 손실 출력
-    print(f'Epoch {epoch+1}/{NUM_EPOCHS}, Train Loss: {train_loss:.6f}, Test Loss: {test_loss:.6f}')
+    # 에포크 결과 출력
+    print(f'에포크 [{epoch+1}/{NUM_EPOCHS}], 훈련 손실: {avg_train_loss:.6f}, 테스트 손실: {avg_test_loss:.6f}')
 
-    # 최고 성능 모델 저장
-    if test_loss < best_loss:
+    # 최고 성능 모델 저장 (테스트 손실 기준)
+    if avg_test_loss < best_loss:
+        print(f'    🚀 테스트 손실 개선 ({best_loss:.6f} -> {avg_test_loss:.6f}). 모델 저장 중...')
+        # 모델의 state_dict (학습 가능한 파라미터들) 저장
         torch.save(model.state_dict(), BEST_MODEL_PATH)
-        print(f'    Best model saved with test loss: {test_loss:.6f}')
-        best_loss = test_loss
+        best_loss = avg_test_loss # 최고 손실 업데이트
 
-print("학습 완료!")
+print(f"🎉 모델 학습 완료! 최종 최고 테스트 손실: {best_loss:.6f}")
+print(f"최고 성능 모델이 '{BEST_MODEL_PATH}' 파일로 저장되었습니다.")
             </code></pre>
 
-            <h3>3.5. 학습 결과 (예시)</h3>
-            <p>학습 중 출력되는 로그는 다음과 같은 형식을 가집니다. 테스트 손실이 개선될 때마다 모델 파일(<code>best_steering_model_xy.pth</code>)이 갱신됩니다.</p>
-            <pre><code>
-Epoch 1/70, Train Loss: 0.297352, Test Loss: 0.083579
-    Best model saved with test loss: 0.083579
-Epoch 2/70, Train Loss: 0.054634, Test Loss: 0.064844
-    Best model saved with test loss: 0.064844
-Epoch 3/70, Train Loss: 0.064151, Test Loss: 0.057499
-    Best model saved with test loss: 0.057499
-... (중략) ...
-Epoch 52/70, Train Loss: 0.042623, Test Loss: 0.021270
-    Best model saved with test loss: 0.021270
-... (중략) ...
-Epoch 65/70, Train Loss: 0.041549, Test Loss: 0.023550
-Epoch 66/70, Train Loss: 0.042796, Test Loss: 0.047188
-Epoch 67/70, Train Loss: 0.043570, Test Loss: 0.028584
-Epoch 68/70, Train Loss: 0.036441, Test Loss: 0.033807
-Epoch 69/70, Train Loss: 0.035894, Test Loss: 0.051173
-Epoch 70/70, Train Loss: 0.039792, Test Loss: 0.039690
-학습 완료!
-            </code></pre>
-            <p>학습이 완료되면 <code>best_steering_model_xy.pth</code> 파일이 생성됩니다. 이 파일은 학습된 모델의 가중치를 담고 있습니다.</p>
+            <h3><span class="emoji">📊</span> 3.5. 학습 결과 확인</h3>
+            <p>학습이 진행되면서 각 에포크마다 훈련 손실과 테스트 손실이 출력됩니다. 이상적으로는 두 손실 모두 꾸준히 감소해야 합니다. 훈련 손실만 계속 줄어들고 테스트 손실은 증가하거나 정체된다면, 모델이 훈련 데이터에 <strong>과적합(Overfitting)</strong>되고 있다는 신호일 수 있습니다. <span class="emoji">🤔</span></p>
+            <p>학습이 완료되면, 테스트 손실이 가장 낮았던 시점의 모델 가중치가 <code>best_steering_model_xy.pth</code> 파일로 저장됩니다. 이 파일이 바로 우리가 다음 단계에서 사용할 소중한 결과물입니다!</p>
         </div>
 
-        <div class="section" id="tensorrt-optimization">
-            <h2>4. TensorRT 최적화 (Build TensorRT model)</h2>
-            <p>JetBot과 같은 임베디드 환경에서 더 빠른 추론 속도를 얻기 위해 학습된 PyTorch 모델을 TensorRT로 변환하고 최적화합니다.</p>
+        <hr>
 
-            <h3>4.1. 목표</h3>
+        <div class="section" id="tensorrt-optimization">
+            <h2><span class="emoji">⚡</span> 4. TensorRT 최적화 (Build TensorRT model)</h2>
+            <p>PyTorch로 학습한 모델도 훌륭하지만, Jetson Nano와 같은 엣지 디바이스에서 실시간으로 빠르게 추론(예측)하기에는 약간 무거울 수 있습니다. <strong>NVIDIA TensorRT</strong>는 딥러닝 모델을 최적화하여 추론 속도를 높이고 리소스 사용량을 줄여주는 강력한 도구입니다. <span class="emoji">🚀</span></p>
+            <p>이 단계에서는 <code>torch2trt</code> 라이브러리를 사용하여, 우리가 학습한 PyTorch 모델(<code>best_steering_model_xy.pth</code>)을 TensorRT 엔진으로 변환하고 최적화합니다.</p>
+
+            <h3><span class="emoji">⭐</span> 4.1. 목표</h3>
             <ul>
-                <li><code>best_steering_model_xy.pth</code> 모델을 TensorRT 엔진으로 변환합니다.</li>
-                <li><code>torch2trt</code> 라이브러리를 사용하여 변환 과정을 간소화합니다.</li>
-                <li>최적화된 모델을 <code>best_steering_model_xy_trt.pth</code> 파일로 저장합니다.</li>
+                <li>학습된 PyTorch 모델을 TensorRT 형식으로 변환하여 추론 성능을 극대화합니다.</li>
+                <li><code>torch2trt</code> 라이브러리를 활용하여 PyTorch 모델에서 TensorRT 모델로 쉽게 변환합니다.</li>
+                <li>최적화된 모델을 <code>best_steering_model_xy_trt.pth</code> 파일로 저장하여 실시간 데모에서 사용합니다.</li>
+                <li><strong>FP16 (반정밀도 부동소수점)</strong> 모드를 사용하여 추가적인 속도 향상 및 메모리 절약을 꾀합니다. (Jetson Nano는 FP16 연산을 지원합니다!)</li>
             </ul>
 
-            <h3>4.2. <code>torch2trt</code> 설치 (필요시)</h3>
-            <p><code>torch2trt</code>가 설치되어 있지 않다면, JetBot 터미널에서 다음 명령어를 실행하여 설치합니다.</p>
+            <h3><span class="emoji">🔧</span> 4.2. <code>torch2trt</code> 설치 (필요시)</h3>
+            <p>만약 JetBot에 <code>torch2trt</code> 라이브러리가 설치되어 있지 않다면, Jetson 터미널에서 다음 명령어를 실행하여 설치해야 합니다.</p>
             <pre><code class="language-bash">
+# 사용자 홈 디렉토리로 이동
 cd $HOME
+# torch2trt 저장소 복제
 git clone https://github.com/NVIDIA-AI-IOT/torch2trt
+# 복제된 디렉토리로 이동
 cd torch2trt
+# 설치 실행 (관리자 권한 필요)
 sudo python3 setup.py install
+# 설치 후 터미널 재시작 또는 환경 재로드 필요할 수 있음
+echo "torch2trt 설치 완료!"
             </code></pre>
 
-            <h3>4.3. 모델 로드 및 변환</h3>
-            <p>먼저 학습된 PyTorch 모델(<code>best_steering_model_xy.pth</code>)을 로드한 다음, <code>torch2trt</code>를 사용하여 TensorRT 모델로 변환합니다.</p>
+            <h3><span class="emoji">🔄</span> 4.3. 모델 로드 및 변환</h3>
+            <p>먼저 학습된 PyTorch 모델(<code>best_steering_model_xy.pth</code>)을 다시 로드합니다. 그런 다음, 모델과 동일한 입력 형태를 가진 더미(dummy) 데이터를 생성하여 <code>torch2trt</code> 함수에 전달합니다. <code>torch2trt</code>는 이 더미 데이터를 이용해 모델의 연산 그래프를 분석하고 TensorRT 엔진으로 최적화합니다.</p>
              <pre><code class="language-python">
 import torchvision
 import torch
-from torch2trt import torch2trt, TRTModule
+from torch2trt import torch2trt, TRTModule # torch2trt 관련 함수 및 클래스 임포트
 
 # 모델 구조 정의 (학습 시와 동일하게)
-model = torchvision.models.resnet18(pretrained=False) # 사전 학습 가중치는 로드 안 함
-model.fc = torch.nn.Linear(512, 2)
+model = torchvision.models.resnet18(pretrained=False) # 사전 학습 가중치는 여기서 로드 안 함
+model.fc = torch.nn.Linear(512, 2) # 출력 레이어 수정
 
-# 학습된 가중치 로드
+# 학습된 모델 가중치 로드 (best_steering_model_xy.pth)
 model.load_state_dict(torch.load('best_steering_model_xy.pth'))
 
-# 모델을 GPU로 이동하고 평가 모드로 설정
+# 모델을 GPU로 이동하고, 평가(eval) 모드로 설정하고, FP16(half) 정밀도로 변경
 device = torch.device('cuda')
-model = model.cuda().eval().half() # half()는 FP16 사용
+model = model.cuda().eval().half()
+
+print("PyTorch 모델 로드 및 FP16 변환 완료.")
 
 # TensorRT 변환을 위한 더미 입력 데이터 생성
-# (배치 크기, 채널, 높이, 너비) 형식, 모델 입력과 동일하게
-data = torch.zeros((1, 3, 224, 224)).cuda().half()
+# 모델 입력과 동일한 형태: (배치 크기=1, 채널=3, 높이=224, 너비=224)
+# 데이터 타입도 모델과 동일하게 FP16(half)으로 설정
+dummy_data = torch.zeros((1, 3, 224, 224)).to(device).half()
 
-# torch2trt를 사용하여 모델 변환 (FP16 모드 활성화)
-# 이 과정은 몇 분 정도 소요될 수 있습니다.
-model_trt = torch2trt(model, [data], fp16_mode=True)
+print("더미 입력 데이터 생성 완료. TensorRT 변환을 시작합니다...")
+# 이 과정은 몇 분 정도 소요될 수 있습니다! 커피 한 잔의 여유를... ☕
 
-# 최적화된 모델 저장
-torch.save(model_trt.state_dict(), 'best_steering_model_xy_trt.pth')
+# torch2trt 함수를 사용하여 모델 변환
+# model: 변환할 PyTorch 모델
+# [dummy_data]: 모델 입력 형태를 알려주기 위한 더미 데이터 리스트
+# fp16_mode=True: FP16 정밀도로 최적화 활성화
+model_trt = torch2trt(model, [dummy_data], fp16_mode=True)
 
-print("TensorRT 모델 변환 및 저장 완료: best_steering_model_xy_trt.pth")
+print("TensorRT 모델 변환 완료!")
+
+# 최적화된 TensorRT 모델의 state_dict 저장
+TRT_MODEL_PATH = 'best_steering_model_xy_trt.pth'
+torch.save(model_trt.state_dict(), TRT_MODEL_PATH)
+
+print(f"최적화된 TensorRT 모델이 '{TRT_MODEL_PATH}' 파일로 저장되었습니다.")
             </code></pre>
-            <p>이제 추론 속도가 향상된 <code>best_steering_model_xy_trt.pth</code> 파일이 생성되었습니다.</p>
+            <p>이제 훨씬 가볍고 빨라진 <code>best_steering_model_xy_trt.pth</code> 모델이 준비되었습니다! 이 모델을 가지고 실시간 도로 주행 데모를 진행할 수 있습니다.</p>
         </div>
 
-        <div class="section" id="live-demo">
-             <h2>5. 실시간 데모 (Live demo - TensorRT)</h2>
-             <p>최적화된 TensorRT 모델을 사용하여 JetBot이 실시간으로 도로를 주행하도록 합니다.</p>
+        <hr>
 
-             <h3>5.1. 목표</h3>
+        <div class="section" id="live-demo">
+             <h2><span class="emoji">🚀</span> 5. 실시간 데모 (Live demo - TensorRT)</h2>
+             <p>드디어 마지막 단계입니다! 최적화된 TensorRT 모델을 JetBot에 탑재하여 실시간 카메라 영상을 보면서 스스로 도로를 따라 주행하는 데모를 실행합니다. <span class="emoji">🎉</span></p>
+
+             <h3><span class="emoji">⭐</span> 5.1. 목표</h3>
              <ul>
-                 <li>TensorRT 모델(<code>best_steering_model_xy_trt.pth</code>)을 로드합니다.</li>
-                 <li>실시간 카메라 입력을 받아 모델 추론을 수행합니다.</li>
-                 <li>모델의 예측값(x, y 좌표)을 사용하여 로봇의 조향 및 속도를 제어합니다.</li>
-                 <li>사용자가 주행 파라미터(속도, 조향 게인 등)를 조절할 수 있는 인터페이스를 제공합니다.</li>
+                 <li>최적화된 TensorRT 모델(<code>best_steering_model_xy_trt.pth</code>)을 로드합니다.</li>
+                 <li>JetBot의 카메라로부터 실시간 영상을 받아옵니다.</li>
+                 <li>영상을 모델이 이해할 수 있는 형태로 <strong>전처리(preprocess)</strong>합니다.</li>
+                 <li>TensorRT 모델을 사용하여 영상으로부터 목표 (x, y) 좌표를 <strong>추론(inference)</strong>합니다.</li>
+                 <li>추론된 (x, y) 좌표를 바탕으로 JetBot의 <strong>조향(steering)</strong> 각도와 <strong>속도(speed)</strong>를 계산합니다.</li>
+                 <li>계산된 값으로 JetBot의 모터를 제어하여 실제로 주행합니다!</li>
+                 <li>사용자가 주행 파라미터(속도, 조향 게인 등)를 실시간으로 조절할 수 있는 위젯 인터페이스를 제공하여 주행 성능을 미세 조정합니다.</li>
              </ul>
 
-             <h3>5.2. TensorRT 모델 로드</h3>
-             <p><code>TRTModule</code>을 사용하여 저장된 TensorRT 모델 상태를 로드합니다.</p>
+             <h3><span class="emoji">💾</span> 5.2. TensorRT 모델 로드</h3>
+             <p><code>TRTModule</code> 클래스를 사용하여 저장된 TensorRT 모델(<code>.pth</code> 파일)을 불러옵니다. 이 모델은 이미 최적화된 상태이므로 별도의 변환 과정 없이 바로 사용할 수 있습니다.</p>
              <pre><code class="language-python">
 import torch
-from torch2trt import TRTModule
+from torch2trt import TRTModule # TensorRT 모델 로드용 클래스
 
 # TRTModule 인스턴스 생성
 model_trt = TRTModule()
 
-# 저장된 TensorRT 모델 상태 로드
-model_trt.load_state_dict(torch.load('best_steering_model_xy_trt.pth'))
+# 저장된 TensorRT 모델 가중치 로드
+TRT_MODEL_PATH = 'best_steering_model_xy_trt.pth'
+model_trt.load_state_dict(torch.load(TRT_MODEL_PATH))
 
-# GPU 설정
+# GPU 설정 (필수는 아니지만 명시적으로)
 device = torch.device('cuda')
+# model_trt = model_trt.to(device) # TRTModule은 로드 시 자동으로 GPU에 올라갈 수 있음
 
-print("TensorRT 모델 로드 완료.")
+print(f"TensorRT 모델 '{TRT_MODEL_PATH}' 로드 완료.")
             </code></pre>
 
-             <h3>5.3. 전처리 함수 정의</h3>
-             <p>카메라에서 얻은 이미지(일반적으로 NumPy 배열, HWC, BGR, 0-255 범위)를 모델 입력 형식(PyTorch Tensor, CHW, RGB, 정규화, FP16, 배치 차원 추가)으로 변환하는 함수를 정의합니다.</p>
+             <h3><span class="emoji">🖼️➡️🧠</span> 5.3. 전처리 함수 정의</h3>
+             <p>카메라에서 얻은 이미지(NumPy 배열, HWC, BGR, [0, 255] 범위)는 모델이 바로 이해할 수 없습니다. 모델 학습 시 사용했던 것과 동일한 방식으로 이미지를 변환(전처리)해줘야 합니다.</p>
+             <ol>
+                 <li>NumPy 배열 (BGR) -> PIL 이미지 (RGB) 변환</li>
+                 <li>PIL 이미지 -> PyTorch 텐서 (CHW, [0, 1] 범위) 변환</li>
+                 <li>텐서를 GPU로 이동시키고 FP16(half) 타입으로 변경</li>
+                 <li>ImageNet 평균/표준편차로 정규화</li>
+                 <li>배치(batch) 차원 추가 (모델 입력 형태 [1, C, H, W] 맞추기)</li>
+             </ol>
              <pre><code class="language-python">
 import torchvision.transforms as transforms
 import torch.nn.functional as F
-import cv2
+import cv2 # OpenCV for BGR to RGB conversion
 import PIL.Image
 import numpy as np
 
-# ImageNet 정규화 파라미터 (FP16으로 GPU에 올림)
+# ImageNet 정규화 파라미터 (GPU에 FP16(half) 타입으로 미리 올려둠)
 mean = torch.Tensor([0.485, 0.456, 0.406]).cuda().half()
 std = torch.Tensor([0.229, 0.224, 0.225]).cuda().half()
 
-def preprocess(image):
-    # NumPy 배열(BGR)을 PIL 이미지(RGB)로 변환
-    image = PIL.Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-    # PIL 이미지를 Tensor로 변환 (CHW, 0-1 범위)
-    image = transforms.functional.to_tensor(image).to(device).half() # FP16 사용
-    # 정규화 수행 (inplace 연산)
-    image.sub_(mean[:, None, None]).div_(std[:, None, None])
-    # 배치 차원 추가 (1, C, H, W)
-    return image[None, ...]
+def preprocess(image_bgr):
+    # 1. NumPy 배열(BGR)을 PIL 이미지(RGB)로 변환
+    image_rgb = PIL.Image.fromarray(cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB))
+
+    # 2. PIL 이미지를 Tensor로 변환 (크기 조정은 카메라에서 이미 수행했다고 가정)
+    #    ToTensor()는 [0, 255] PIL 이미지를 [0, 1] FloatTensor (CHW)로 변환
+    image_tensor = transforms.functional.to_tensor(image_rgb)
+
+    # 3. 텐서를 GPU로 이동시키고 FP16 타입으로 변경
+    image_tensor = image_tensor.to(device).half()
+
+    # 4. 정규화 수행 (inplace 연산으로 메모리 효율성 증대)
+    #    mean을 빼고 std로 나눔. 브로드캐스팅을 위해 차원 확장([:, None, None]) 사용
+    image_tensor.sub_(mean[:, None, None]).div_(std[:, None, None])
+
+    # 5. 배치 차원 추가 (맨 앞에 차원 추가: [C, H, W] -> [1, C, H, W])
+    return image_tensor[None, ...]
+
+print("이미지 전처리 함수 'preprocess' 정의 완료.")
             </code></pre>
 
-             <h3>5.4. 카메라 및 로봇 인터페이스 설정</h3>
-             <p>카메라, 로봇 객체를 초기화하고, 카메라 피드를 표시할 위젯을 설정합니다.</p>
+             <h3><span class="emoji">🤖</span><span class="emoji">📷</span> 5.4. 카메라 및 로봇 인터페이스 설정</h3>
+             <p>JetBot의 카메라와 모터를 제어하기 위한 객체를 생성하고, 실시간 카메라 영상을 Jupyter Lab에서 볼 수 있도록 위젯을 설정합니다.</p>
              <pre><code class="language-python">
 from IPython.display import display
 import ipywidgets
 import traitlets
 from jetbot import Camera, bgr8_to_jpeg, Robot
 
-# 카메라 초기화 (데이터 수집 시와 동일한 크기 권장)
+# 카메라 초기화 (데이터 수집/학습 시와 동일한 224x224 크기 사용)
 camera = Camera(width=224, height=224)
 
-# 카메라 피드 표시용 이미지 위젯
+# 실시간 카메라 피드를 보여줄 이미지 위젯
 image_widget = ipywidgets.Image(width=camera.width, height=camera.height)
 
-# 카메라 출력을 이미지 위젯에 연결 (BGR -> JPEG 변환)
+# 카메라의 영상('value')을 이미지 위젯에 연결 (BGR -> JPEG 변환 필요)
 traitlets.dlink((camera, 'value'), (image_widget, 'value'), transform=bgr8_to_jpeg)
 
-# 로봇 객체 초기화
+# JetBot 로봇 객체 초기화 (모터 제어용)
 robot = Robot()
 
-# 카메라 피드 표시
-display(image_widget)
+# 위젯들을 보기 좋게 배치하고 화면에 표시
+display(ipywidgets.VBox([
+    ipywidgets.HTML("<h3><span class='emoji'>👀</span> 실시간 카메라 영상</h3>"),
+    image_widget
+]))
+
+print("카메라 및 로봇 객체 초기화 완료.")
             </code></pre>
 
-             <h3>5.5. 제어 파라미터 슬라이더</h3>
-             <p>주행 성능을 미세 조정하기 위한 슬라이더 위젯을 생성합니다.</p>
+             <h3><span class="emoji">🎛️</span> 5.5. 제어 파라미터 슬라이더</h3>
+             <p>JetBot의 주행 성능을 실시간으로 미세 조정할 수 있는 슬라이더를 만듭니다. 최적의 값은 트랙 환경, JetBot의 상태(배터리, 모터 편차 등)에 따라 달라질 수 있으므로 직접 조절하며 찾아야 합니다.</p>
              <ul>
-                 <li><code>speed_gain_slider</code>: 기본 속도 조절 (0 ~ 1)</li>
-                 <li><code>steering_gain_slider</code>: 조향 민감도 (P 제어 게인) 조절 (값이 크면 더 민감하게 반응)</li>
-                 <li><code>steering_dgain_slider</code>: 조향 안정성 (D 제어 게인) 조절 (값이 크면 변화에 더 빠르게 반응, 진동 억제 도움)</li>
-                 <li><code>steering_bias_slider</code>: 조향 편향 조절 (로봇이 한쪽으로 쏠릴 때 보정)</li>
+                 <li><code>speed_gain_slider</code>: <strong>기본 속도</strong>를 조절합니다. 값이 높을수록 빨라집니다. (0.0 ~ 1.0)</li>
+                 <li><code>steering_gain_slider (Kp)</code>: <strong>조향 민감도 (비례 제어)</strong>를 조절합니다. 목표 지점과의 각도 차이(오차)에 비례하여 조향 강도를 결정합니다. 값이 높으면 작은 오차에도 크게 반응하여 민첩해지지만, 너무 높으면 좌우로 심하게 흔들릴(oscillate) 수 있습니다. (0.0 ~ 1.0)</li>
+                 <li><code>steering_dgain_slider (Kd)</code>: <strong>조향 안정성 (미분 제어)</strong>를 조절합니다. 각도 오차의 변화율에 비례하여 조향 강도를 조절합니다. 급격한 방향 전환을 억제하고 진동을 줄여 주행을 부드럽게 만드는 데 도움을 줍니다. (0.0 ~ 0.5)</li>
+                 <li><code>steering_bias_slider</code>: <strong>조향 편향</strong>을 조절합니다. 로봇이 특정 방향(왼쪽 또는 오른쪽)으로 계속 쏠리는 경향이 있을 때 이를 보정합니다. 모터 자체의 미세한 차이나 카메라 장착 위치의 비대칭성 때문에 필요할 수 있습니다. (-0.3 ~ 0.3)</li>
              </ul>
+             <p>💡 <strong>팁:</strong> 처음에는 낮은 속도(<code>speed_gain</code>)로 설정하고, <code>steering_gain</code>을 조절하여 안정적으로 따라가는 값을 찾습니다. 그 후, 필요에 따라 <code>steering_dgain</code>과 <code>steering_bias</code>를 미세 조정하세요.</p>
             <pre><code class="language-python">
-# 속도 게인 슬라이더
-speed_gain_slider = ipywidgets.FloatSlider(min=0.0, max=1.0, step=0.01, value=0.15, description='speed gain')
-# 조향 P 게인 슬라이더
-steering_gain_slider = ipywidgets.FloatSlider(min=0.0, max=1.0, step=0.01, value=0.2, description='steering gain')
-# 조향 D 게인 슬라이더
-steering_dgain_slider = ipywidgets.FloatSlider(min=0.0, max=0.5, step=0.001, value=0.0, description='steering kd')
-# 조향 편향 슬라이더
-steering_bias_slider = ipywidgets.FloatSlider(min=-0.3, max=0.3, step=0.01, value=0.0, description='steering bias')
+# --- 제어 파라미터 슬라이더 생성 ---
+# 기본 속도 조절
+speed_gain_slider = ipywidgets.FloatSlider(min=0.0, max=1.0, step=0.01, value=0.18, description='속도 (Speed)')
+# 조향 민감도 (P 제어 게인)
+steering_gain_slider = ipywidgets.FloatSlider(min=0.0, max=1.0, step=0.01, value=0.15, description='조향 게인 (Kp)')
+# 조향 안정성 (D 제어 게인)
+steering_dgain_slider = ipywidgets.FloatSlider(min=0.0, max=0.5, step=0.001, value=0.03, description='조향 안정성 (Kd)')
+# 조향 편향 보정
+steering_bias_slider = ipywidgets.FloatSlider(min=-0.3, max=0.3, step=0.01, value=0.0, description='조향 편향 (Bias)')
 
-# 슬라이더 표시
-display(speed_gain_slider, steering_gain_slider, steering_dgain_slider, steering_bias_slider)
+# 슬라이더들을 화면에 표시
+display(ipywidgets.VBox([
+    ipywidgets.HTML("<h3><span class='emoji'>⚙️</span> 주행 파라미터 조절</h3>"),
+    speed_gain_slider,
+    steering_gain_slider,
+    steering_dgain_slider,
+    steering_bias_slider
+]))
             </code></pre>
 
-             <h3>5.6. 예측값 및 조향 시각화 슬라이더 (선택 사항)</h3>
-             <p>모델의 예측값(x, y)과 계산된 조향 값을 시각적으로 확인하기 위한 슬라이더를 추가합니다.</p>
+             <h3><span class="emoji">📊</span> 5.6. 예측값 및 조향 시각화 슬라이더 (선택 사항)</h3>
+             <p>모델이 예측하는 내부 값(x, y)과 최종 계산된 조향 값을 실시간으로 확인하면 디버깅과 파라미터 튜닝에 도움이 됩니다.</p>
              <pre><code class="language-python">
-# 예측된 x 좌표 표시
-x_slider = ipywidgets.FloatSlider(min=-1.0, max=1.0, description='x', disabled=True)
-# 예측된 y 좌표 표시 (정규화된 값이 아닌, 주행 로직에 사용되는 값 표시)
-y_slider = ipywidgets.FloatSlider(min=0, max=1.0, orientation='vertical', description='y', disabled=True)
-# 최종 조향 값 표시
-steering_slider = ipywidgets.FloatSlider(min=-1.0, max=1.0, description='steering', disabled=True)
-# 현재 설정된 속도 값 표시
-speed_slider = ipywidgets.FloatSlider(min=0, max=1.0, orientation='vertical', description='speed', disabled=True)
+# --- 내부 상태 시각화 슬라이더 ---
+# 예측된 x 좌표 (-1 ~ 1) 표시 (읽기 전용)
+x_slider = ipywidgets.FloatSlider(min=-1.0, max=1.0, description='예측 X', disabled=True, readout_format='.2f')
+# 주행 로직에 사용되는 변환된 y 값 (0 ~ 0.5) 표시 (읽기 전용)
+# y_slider = ipywidgets.FloatSlider(min=0, max=0.5, orientation='vertical', description='예측 Y (변환값)', disabled=True, readout_format='.2f') # y값 시각화는 덜 직관적일 수 있음
+# 최종 계산된 조향 값 (-1 ~ 1) 표시 (읽기 전용)
+steering_slider = ipywidgets.FloatSlider(min=-1.0, max=1.0, description='최종 조향', disabled=True, readout_format='.2f')
+# 현재 적용되는 기본 속도 표시 (읽기 전용)
+# speed_slider = ipywidgets.FloatSlider(min=0, max=1.0, orientation='vertical', description='현재 속도', disabled=True, readout_format='.2f')
 
-# 슬라이더 표시
-display(ipywidgets.HBox([y_slider, speed_slider]))
-display(x_slider, steering_slider)
+# 시각화 슬라이더 표시
+display(ipywidgets.VBox([
+    ipywidgets.HTML("<h4><span class='emoji'>📈</span> 내부 예측 및 제어값</h4>"),
+    x_slider,
+    # y_slider, # 필요시 주석 해제
+    steering_slider,
+    # speed_slider # 필요시 주석 해제
+]))
             </code></pre>
 
-             <h3>5.7. 실행 함수 (<code>execute</code>)</h3>
-             <p>카메라에서 새로운 프레임이 들어올 때마다 호출될 메인 함수를 정의합니다. 이 함수는 다음 작업을 수행합니다.</p>
+             <h3><span class="emoji">🧠➡️🚗</span> 5.7. 실행 함수 (`execute`) 정의 및 연결</h3>
+             <p>이것이 바로 실시간 주행의 핵심 로직입니다! 카메라에서 새로운 프레임이 들어올 때마다 이 함수가 호출되어 다음 작업을 순차적으로 수행합니다:</p>
              <ol>
-                 <li>이미지 전처리</li>
-                 <li>TensorRT 모델 추론 수행하여 (x, y) 좌표 예측</li>
-                 <li>예측된 (x, y) 좌표를 사용하여 목표 각도(<code>angle</code>) 계산</li>
-                 <li>PD 제어 로직을 적용하여 최종 조향 값(<code>pid</code>) 계산</li>
-                 <li>계산된 속도와 조향 값으로 로봇 모터 제어</li>
+                 <li>새로운 카메라 이미지 가져오기.</li>
+                 <li>이미지 <strong>전처리</strong> (<code>preprocess</code> 함수 사용).</li>
+                 <li>TensorRT 모델로 (x, y) 좌표 <strong>추론</strong>.</li>
+                 <li>모델 출력값(x, y)을 <strong>해석</strong>하여 주행 제어에 사용할 형태로 변환.
+                    *   원본 코드의 `y = (0.5 - xy[1]) / 2.0`는 모델의 y 출력값(위쪽이 1, 아래쪽이 -1)을 `atan2` 함수에 사용하기 적합한 형태(위쪽/멀리 갈수록 0에 가깝고, 아래쪽/가까울수록 0.5에 가까움)로 변환하는 과정입니다. 이 y값은 각도 계산 시 일종의 '거리 가중치' 역할을 하여, 같은 x 편차라도 y값이 작을수록 (목표가 멀리 있을수록) 더 큰 각도 변화를 유도합니다.
+                 </li>
+                 <li>`np.arctan2(x, y)`를 사용하여 현재 로봇이 목표 지점을 향하기 위해 회전해야 할 <strong>목표 각도(angle)</strong>를 라디안 단위로 계산합니다.</li>
+                 <li><strong>PD 제어(Proportional-Derivative Control)</strong> 로직 적용:
+                     *   **P (비례) 제어:** 현재 목표 각도(<code>angle</code>) 오차에 비례하여 조향 강도를 결정합니다 (<code>angle * Kp</code>).
+                     *   **D (미분) 제어:** 각도 오차의 변화율(<code>angle - angle_last</code>)에 비례하여 조향 강도를 결정합니다 (<code>(angle - angle_last) * Kd</code>). 급격한 변화를 억제하여 안정성을 높입니다.
+                 </li>
+                 <li>최종 조향 값 계산: PD 제어 결과에 <strong>조향 편향(bias)</strong>을 더합니다.</li>
+                 <li>계산된 기본 속도와 최종 조향 값을 조합하여 <strong>왼쪽/오른쪽 모터 각각의 속도</strong>를 결정합니다. 조향 값에 따라 좌우 모터 속도에 차이를 주어 회전합니다. 모터 값은 항상 [0.0, 1.0] 범위 내로 제한(clamping)합니다.</li>
+                 <li>계산된 속도로 로봇 <strong>모터를 구동</strong>합니다!</li>
+                 <li>다음 계산을 위해 현재 각도를 <code>angle_last</code>에 저장합니다.</li>
              </ol>
+             <p>마지막으로, `camera.observe()` 함수를 사용하여 카메라의 `value` 속성(즉, 새 프레임)이 변경될 때마다 이 `execute` 함수가 자동으로 호출되도록 연결합니다.</p>
              <pre><code class="language-python">
 import numpy as np
+import time # 로봇 정지 전 잠시 대기 위해 추가
 
-# PD 제어를 위한 변수 초기화
+# PD 제어를 위한 이전 각도 값 저장 변수
 angle = 0.0
 angle_last = 0.0
 
-# 카메라 프레임 변경 시 실행될 함수
+# 카메라 프레임이 업데이트될 때마다 실행될 메인 함수
 def execute(change):
-    global angle, angle_last # 이전 각도 값을 유지하기 위해 global 사용
+    global angle, angle_last # 함수 외부의 angle, angle_last 변수 사용 선언
 
-    # 새 카메라 프레임 가져오기
-    image = change['new']
+    # 1. 새로운 카메라 이미지 가져오기
+    image = change['new'] # 'new' 키에 새 이미지 데이터가 들어있음
 
-    # 이미지 전처리 및 모델 추론
+    # 2. 이미지 전처리 및 모델 추론
     xy = model_trt(preprocess(image)).detach().float().cpu().numpy().flatten()
     x = xy[0] # 예측된 x 좌표 (-1 ~ 1)
-    # y 좌표 변환 (원본 코드 기준, 값이 작을수록 멀리 있는 것으로 해석)
-    # 예측된 y 값(xy[1])은 -1(아래) ~ 1(위) 범위.
-    # (0.5 - xy[1]) / 2.0 계산: y값이 1(위)이면 0에 가깝고, -1(아래)이면 0.5에 가까워짐
-    y = (0.5 - xy[1]) / 2.0
+    # 3. 모델 y 출력값 변환 (주행 로직용)
+    y = (0.5 - xy[1]) / 2.0 # 값이 작을수록 멀리 있는 것으로 해석 (0 ~ 0.5 범위)
 
-    # 시각화 슬라이더 업데이트
-    x_slider.value = x
-    y_slider.value = y
-    speed_slider.value = speed_gain_slider.value
+    # (선택 사항) 시각화 슬라이더 업데이트
+    x_slider.value = float(x)
+    # y_slider.value = float(y) # 필요시 주석 해제
 
-    # 목표 각도 계산 (x: 좌우 편차, y: 거리 가중치 역할)
-    # arctan2(x, y)는 y축(전방) 기준 x 방향으로의 각도를 라디안 단위로 반환
+    # 현재 설정된 기본 속도 가져오기
+    speed_value = speed_gain_slider.value
+    # speed_slider.value = speed_value # 필요시 주석 해제
+
+    # 4. 목표 각도 계산 (arctan2 사용, 라디안 단위)
+    # atan2(x, y)는 y축(전방) 기준 x 방향으로의 각도를 반환
     angle = np.arctan2(x, y)
 
-    # PD 제어 계산
-    # P 제어: 현재 각도 오차 * P 게인
-    # D 제어: 각도 변화량 * D 게인
-    pid = angle * steering_gain_slider.value + (angle - angle_last) * steering_dgain_slider.value
+    # 5. PD 제어 계산
+    Kp = steering_gain_slider.value
+    Kd = steering_dgain_slider.value
+    # 비례항(P) + 미분항(D)
+    pid = Kp * angle + Kd * (angle - angle_last)
 
-    # 현재 각도를 다음 계산을 위해 저장
+    # 6. 현재 각도를 다음 계산을 위해 저장
     angle_last = angle
 
-    # 최종 조향 값 계산 (PD 제어 값 + 조향 편향)
-    steering_value = pid + steering_bias_slider.value
-    steering_slider.value = steering_value # 시각화 슬라이더 업데이트
+    # 7. 최종 조향 값 계산 (PD 제어 값 + 조향 편향)
+    bias = steering_bias_slider.value
+    steering_value = pid + bias
 
-    # 모터 속도 계산
-    # 기본 속도에서 조향 값을 더하거나 빼서 좌우 모터 속도 차등 적용
-    # 값 범위를 0.0 ~ 1.0 사이로 제한 (clamping)
-    left_motor_value = max(min(speed_slider.value + steering_value, 1.0), 0.0)
-    right_motor_value = max(min(speed_slider.value - steering_value, 1.0), 0.0)
+    # (선택 사항) 조향 시각화 슬라이더 업데이트
+    steering_slider.value = float(steering_value)
 
-    # 로봇 모터 구동
+    # 8. 좌/우 모터 속도 계산 및 범위 제한 [0.0, 1.0]
+    # 왼쪽 모터: 기본 속도 + 조향 값 (오른쪽으로 돌 때 빨라짐)
+    # 오른쪽 모터: 기본 속도 - 조향 값 (왼쪽으로 돌 때 빨라짐)
+    left_motor_value = max(min(speed_value + steering_value, 1.0), 0.0)
+    right_motor_value = max(min(speed_value - steering_value, 1.0), 0.0)
+
+    # 9. 로봇 모터 구동!
     robot.left_motor.value = left_motor_value
     robot.right_motor.value = right_motor_value
 
-# 초기 실행 (카메라 값이 로드되면 한번 실행)
-# execute({'new': camera.value}) # observe가 설정되면 자동으로 호출되므로 주석 처리 가능
+# ---- 실행 준비 및 시작 ----
 
-# 카메라의 'value' 속성이 변경될 때마다 execute 함수를 호출하도록 설정
+# 이전에 등록된 observe 함수가 있다면 해제 (코드 재실행 시 중복 방지)
+try:
+    camera.unobserve_all()
+    print("이전 카메라 observe 콜백 해제 완료.")
+except Exception as e:
+    print(f"이전 콜백 해제 중 오류 (무시 가능): {e}")
+
+# 초기 실행 (선택 사항, 첫 프레임 처리를 원할 경우)
+# print("첫 프레임 처리 시도...")
+# execute({'new': camera.value})
+
+# 카메라의 'value'가 변경될 때마다 execute 함수를 호출하도록 등록!
 camera.observe(execute, names='value')
 
-print("카메라 observe 설정 완료. 로봇이 주행을 시작할 수 있습니다.")
-print("주의: 로봇이 움직일 수 있으니 주변 공간을 확보하고 트랙 위에 올려놓으세요.")
+print("🚀 실시간 주행 시작 준비 완료!")
+print("⚠️ 경고: JetBot이 움직일 수 있습니다! 주변 공간을 확보하고 트랙 위에 올려놓으세요.")
+print("   주행 중 문제가 발생하면 아래 '주행 중지' 코드를 실행하세요.")
+
             </code></pre>
 
-            <h3>5.8. 주행 시작 및 중지</h3>
-            <p>위 코드를 실행하면 JetBot은 카메라 프레임이 업데이트될 때마다 <code>execute</code> 함수를 호출하여 주행을 시작합니다. 주행 중 슬라이더를 조절하여 로봇의 움직임을 미세 조정할 수 있습니다.</p>
-            <p>주행을 멈추려면 다음 코드를 실행하여 <code>observe</code> 연결을 해제합니다.</p>
+            <h3><span class="emoji">🛑</span> 5.8. 주행 시작 및 중지</h3>
+            <p>위의 마지막 코드 셀을 실행하면, JetBot은 카메라로부터 새로운 프레임이 들어올 때마다 <code>execute</code> 함수를 실행하여 스스로 주행을 시작합니다! 슬라이더를 조절하며 JetBot이 트랙을 부드럽게 따라가는 최적의 파라미터를 찾아보세요.</p>
+            <p><strong>주행을 멈추고 싶을 때는</strong>, 아래 코드 셀을 실행하여 카메라와 <code>execute</code> 함수 간의 연결(observe)을 끊고 모터를 정지시키세요.</p>
             <pre><code class="language-python">
-# 카메라 observe 해제
+# 카메라 observe 해제 (execute 함수 호출 중단)
 camera.unobserve(execute, names='value')
+print("카메라 observe 해제 완료.")
 
-# 로봇 모터 정지 (선택 사항)
-time.sleep(0.1) # 잠시 대기 후 정지
+# 로봇 모터 즉시 정지
+time.sleep(0.1) # 혹시 모를 딜레이 후 정지
 robot.stop()
+print("🛑 로봇 모터 정지 완료.")
 
-print("카메라 observe 해제 및 로봇 정지 완료.")
+# (선택 사항) 카메라 정지
+# camera.stop()
+# print("카메라 정지 완료.")
             </code></pre>
         </div>
 
+        <hr>
+
         <div class="section" id="conclusion">
-            <h2>6. 결론</h2>
-            <p>본 문서는 JetBot을 이용한 도로 주행 프로젝트의 전체 과정을 다루었습니다. 데이터 수집, PyTorch 기반 모델 학습, TensorRT 최적화, 그리고 실시간 데모 구현 단계를 통해 JetBot이 카메라 이미지만으로 트랙을 따라 주행하는 기능을 구현할 수 있음을 보였습니다. 특히 TensorRT 최적화를 통해 임베디드 환경에서의 실시간 성능을 확보하는 것이 중요합니다. 사용자는 제공된 코드와 설명을 바탕으로 자신만의 주행 환경에 맞춰 데이터를 수집하고 모델을 개선하여 더 나은 주행 성능을 달성할 수 있습니다.</p>
+            <h2><span class="emoji">🏁</span> 6. 결론 및 다음 단계</h2>
+            <p>축하드립니다! 🎉 이 긴 여정을 통해 여러분은 JetBot으로 도로 주행 데이터를 수집하고, 딥러닝 모델을 학습시키고, TensorRT로 최적화하여, 마침내 실시간 자율 주행 데모까지 구현하는 전체 과정을 경험하셨습니다.</p>
+            <p>이 프로젝트는 컴퓨터 비전, 딥러닝(회귀), 로봇 제어(PD 제어), 그리고 엣지 컴퓨팅 최적화(TensorRT) 등 다양한 핵심 기술을 아우르는 훌륭한 실습 예제입니다. 여기서 얻은 지식과 경험은 다른 로봇 공학 및 AI 프로젝트에도 유용하게 활용될 수 있을 것입니다.</p>
+            <p><strong>다음 단계로 도전해볼 만한 아이디어들:</strong></p>
+            <ul>
+                <li><strong><span class="emoji">🏞️</span> 다양한 환경에서 데이터 수집 및 학습:</strong> 더 복잡한 트랙, 다른 조명 조건, 장애물이 있는 환경 등에서 데이터를 추가로 수집하고 모델 성능을 개선해보세요.</li>
+                <li><strong><span class="emoji">🦾</span> 모델 아키텍처 변경:</strong> ResNet 외에 MobileNet, EfficientNet 등 다른 경량 모델 아키텍처를 사용하여 성능과 속도를 비교해보세요.</li>
+                <li><strong><span class="emoji">🧭</span> 제어 로직 개선:</strong> 단순한 PD 제어 대신 PID 제어 전체를 구현하거나, 경로 계획 알고리즘을 결합하여 더 정교한 주행 제어를 시도해보세요.</li>
+                <li><strong><span class="emoji">🚦</span> 추가 기능 통합:</strong> 신호등 인식, 장애물 회피 등 다른 AI 모델과 결합하여 더 지능적인 주행 시스템을 구축해보세요.</li>
+            </ul>
+            <p>JetBot과 함께하는 AI 여정에 행운이 가득하길 바랍니다! <span class="emoji">💡</span><span class="emoji">🚀</span></p>
         </div>
 
     </div> <!-- /container -->
 
-    <!--
-    THREE.JS LIBRARY EMBEDDED HERE
-    This makes the file very large. Normally, you'd use:
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://unpkg.com/three@<version>/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three@<version>/examples/jsm/"
-        }
-      }
-    </script>
-    <script type="module" src="your_script.js"></script>
-    But to fulfill the single-file requirement, the library is included below.
-    NOTE: The embedded three.js library code is VERY LONG and has been OMITTED
-    from this text representation for brevity. You would need to copy the contents of
-    the three.js library file (and necessary addons like GLTFLoader, OrbitControls)
-    into the script tag below.
-
-    A simplified placeholder is used here. You MUST replace the placeholder content
-    with the actual library code from the three.js build files (e.g., three.module.js)
-    and addon files (e.g., examples/jsm/loaders/GLTFLoader.js,
-    examples/jsm/controls/OrbitControls.js). Make sure to handle the module structure
-    correctly if embedding module-based code. This often requires bundling tools
-    or careful manual handling.
-
-    For demonstration purposes, this example will use CDN links via importmap,
-    which violates the strict "single file" request but makes the example runnable
-    without embedding megabytes of library code. If you absolutely need a single
-    file, you MUST replace the importmap and module script with the embedded library code.
-    -->
-
+    <!-- Three.js 라이브러리 로딩 (Importmap 사용 - CDN 방식) -->
+    <!-- 중요: 완전한 단일 파일을 위해서는 이 부분을 제거하고,
+         필요한 three.js 라이브러리 코드를 아래 <script type="module"> 안에 직접 삽입해야 합니다.
+         그러나 이는 파일 크기를 매우 크게 만듭니다. CDN 방식이 일반적입니다. -->
     <script type="importmap">
       {
         "imports": {
@@ -755,98 +936,94 @@ print("카메라 observe 해제 및 로봇 정지 완료.")
       }
     </script>
 
+    <!-- 3D 뷰어 실행 스크립트 -->
     <script type="module">
-        // Import necessary modules from three.js (using the importmap)
+        // 필요한 모듈 임포트
         import * as THREE from 'three';
         import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-        let scene, camera, renderer, controls;
+        let scene, camera, renderer, controls, model;
         const container = document.getElementById('viewer-container');
         const loadingIndicator = document.getElementById('loading-indicator');
 
         function init3DViewer() {
-            // Scene
+            // 1. Scene 생성
             scene = new THREE.Scene();
-            scene.background = new THREE.Color(0xe0e0e0); // Match container background
-            // Fog can make it look a bit nicer
-            // scene.fog = new THREE.Fog(0xe0e0e0, 20, 100);
+            scene.background = new THREE.Color(0xf1f3f5); // 컨테이너 배경색과 유사하게
+            // scene.fog = new THREE.Fog(0xf1f3f5, 5, 15); // 약간의 안개 효과 (선택 사항)
 
-            // Camera
+            // 2. Camera 생성
             camera = new THREE.PerspectiveCamera(
-                75, // fov
-                container.clientWidth / container.clientHeight, // aspect ratio
-                0.1, // near clipping plane
-                1000 // far clipping plane
+                50, // Field of View (시야각) - 조금 줄여서 왜곡 감소
+                container.clientWidth / container.clientHeight, // Aspect Ratio (종횡비)
+                0.1, // Near clipping plane (가까운 절단면)
+                100 // Far clipping plane (먼 절단면)
             );
-            camera.position.set(1, 1, 2); // Adjust initial camera position
+            camera.position.set(1.5, 1.2, 2.5); // 초기 카메라 위치 조정
 
-            // Renderer
-            renderer = new THREE.WebGLRenderer({ antialias: true });
+            // 3. Renderer 생성
+            renderer = new THREE.WebGLRenderer({ antialias: true }); // 안티앨리어싱 활성화
             renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio); // For sharper rendering on high DPI screens
-            renderer.shadowMap.enabled = true; // Enable shadows if needed
+            renderer.setPixelRatio(window.devicePixelRatio); // 고해상도 디스플레이 지원
+            // renderer.shadowMap.enabled = true; // 그림자 활성화 (필요시)
+            // renderer.outputEncoding = THREE.sRGBEncoding; // 색상 인코딩 (GLB 표준)
             container.appendChild(renderer.domElement);
 
-            // Controls
+            // 4. Controls 생성 (OrbitControls)
             controls = new OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true; // Smooths out the camera movement
-            controls.dampingFactor = 0.05;
-            controls.screenSpacePanning = false; // Keep panning behavior intuitive
-            controls.minDistance = 0.5; // Min zoom
-            controls.maxDistance = 10; // Max zoom
-            controls.target.set(0, 0.5, 0); // Point camera towards the center of the bot initially
+            controls.enableDamping = true; // 부드러운 카메라 움직임
+            controls.dampingFactor = 0.08;
+            controls.screenSpacePanning = false; // 패닝(이동) 방식 제한
+            controls.minDistance = 0.5; // 최소 줌 거리
+            controls.maxDistance = 8; // 최대 줌 거리
+            controls.target.set(0, 0.3, 0); // 카메라가 바라볼 초기 지점 (모델 중심으로 조정)
             controls.update();
 
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8); // Soft white light
+            // 5. Lighting 설정
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1.0); // 전체적으로 부드러운 빛
             scene.add(ambientLight);
 
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
-            directionalLight.position.set(5, 10, 7.5);
-            // Optional: Add shadows from directional light
-            // directionalLight.castShadow = true;
-            // directionalLight.shadow.mapSize.width = 1024;
-            // directionalLight.shadow.mapSize.height = 1024;
-            scene.add(directionalLight);
+            const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x888888, 1.2 ); // 하늘/땅 색상 빛
+            hemiLight.position.set( 0, 20, 0 );
+            scene.add( hemiLight );
 
-             const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.8);
-             directionalLight2.position.set(-5, -10, -7.5);
-             scene.add(directionalLight2);
+            const dirLight = new THREE.DirectionalLight(0xffffff, 1.5); // 주요 방향성 빛 (태양광 느낌)
+            dirLight.position.set(3, 10, 5);
+            // dirLight.castShadow = true; // 그림자 생성 (성능 저하 가능)
+            scene.add(dirLight);
 
-            // Optional: Add a ground plane
-            // const plane = new THREE.Mesh(
-            //     new THREE.PlaneGeometry(100, 100),
-            //     new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: false })
-            // );
-            // plane.rotation.x = -Math.PI / 2;
-            // plane.receiveShadow = true;
-            // scene.add(plane);
+             const dirLight2 = new THREE.DirectionalLight(0xffffff, 0.8); // 보조 방향성 빛 (반대편)
+             dirLight2.position.set(-3, -10, -5);
+             scene.add(dirLight2);
 
-            // GLTF Loader
+
+            // 6. GLTF 모델 로더 설정 및 로드
             const loader = new GLTFLoader();
             loader.load(
-                'jetbot.glb', // Path to your GLB file (MUST be in the same directory)
+                'jetbot.glb', // GLB 파일 경로 (HTML과 같은 디렉토리)
+                // 로드 성공 시 콜백 함수
                 function (gltf) {
-                    const model = gltf.scene;
+                    model = gltf.scene;
 
-                    // Optional: Center and scale the model if needed
+                    // 모델 자동 중앙 정렬 및 스케일 조정 (뷰어에 잘 보이도록)
                     const box = new THREE.Box3().setFromObject(model);
                     const center = box.getCenter(new THREE.Vector3());
                     const size = box.getSize(new THREE.Vector3());
                     const maxDim = Math.max(size.x, size.y, size.z);
-                    const scale = 1.0 / maxDim; // Adjust scale as needed
-                    model.scale.set(scale, scale, scale);
-                    model.position.sub(center.multiplyScalar(scale)); // Center the model
+                    const scale = 1.5 / maxDim; // 뷰어 크기에 맞게 스케일 조정 (값 조절 가능)
 
-                     // Adjust model position if needed after scaling and centering
-                    model.position.y += 0.1; // Lift the bot slightly if it clips the origin plane
+                    model.scale.set(scale, scale, scale); // 스케일 적용
+                    model.position.sub(center.multiplyScalar(scale)); // 중앙으로 이동
 
-                    scene.add(model);
-                    loadingIndicator.style.display = 'none'; // Hide loading indicator
-                    console.log('JetBot model loaded successfully.');
+                    // 모델 위치 미세 조정 (예: 바닥에 딱 붙도록)
+                    model.position.y -= size.y * scale / 2 - 0.01; // 바닥 높이 계산 후 살짝 위로
 
-                     // Optional: Traverse model for shadows if enabled
+                    scene.add(model); // 씬에 모델 추가
+                    loadingIndicator.style.display = 'none'; // 로딩 인디케이터 숨기기
+                    console.log('🤖 JetBot 3D 모델 로드 성공!');
+
+                    // 그림자 설정 (만약 활성화했다면)
                     // model.traverse(function (node) {
                     //     if (node.isMesh) {
                     //         node.castShadow = true;
@@ -854,40 +1031,43 @@ print("카메라 observe 해제 및 로봇 정지 완료.")
                     //     }
                     // });
                 },
-                // called while loading is progressing (optional)
+                // 로딩 진행 중 콜백 함수 (선택 사항)
                 function (xhr) {
                     const percentLoaded = (xhr.loaded / xhr.total) * 100;
-                    loadingIndicator.textContent = `모델 로딩 중... ${Math.round(percentLoaded)}%`;
-                    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+                    loadingIndicator.textContent = `⏳ 모델 로딩 중... ${Math.round(percentLoaded)}%`;
+                    // console.log((xhr.loaded / xhr.total * 100) + '% loaded');
                 },
-                // called when loading has errors
+                // 로드 오류 시 콜백 함수
                 function (error) {
-                    console.error('Error loading GLB model:', error);
-                    loadingIndicator.textContent = '모델 로드 실패!';
+                    console.error('❌ 3D 모델 로드 중 오류 발생:', error);
+                    loadingIndicator.textContent = '😭 모델 로드 실패!';
                     loadingIndicator.style.color = 'red';
                 }
             );
 
-            // Handle window resize
+            // 7. 창 크기 변경 시 처리
             window.addEventListener('resize', onWindowResize, false);
 
-            // Start animation loop
+            // 8. 애니메이션 루프 시작
             animate();
         }
 
+        // 창 크기 변경 핸들러
         function onWindowResize() {
+            if (!camera || !renderer || !container) return;
             camera.aspect = container.clientWidth / container.clientHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(container.clientWidth, container.clientHeight);
         }
 
+        // 애니메이션 루프
         function animate() {
-            requestAnimationFrame(animate);
-            controls.update(); // only required if controls.enableDamping = true or controls.autoRotate = true
-            renderer.render(scene, camera);
+            requestAnimationFrame(animate); // 다음 프레임 요청
+            controls.update(); // OrbitControls 업데이트 (댐핑 등)
+            renderer.render(scene, camera); // 씬 렌더링
         }
 
-        // Initialize the 3D viewer once the DOM is ready
+        // DOM 로드 완료 후 3D 뷰어 초기화 실행
         document.addEventListener('DOMContentLoaded', init3DViewer);
 
     </script>
