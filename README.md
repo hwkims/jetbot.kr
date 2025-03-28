@@ -1,5 +1,10 @@
 # JetBot: NVIDIA Jetson Nano 기반 오픈소스 AI 로봇
 
+https://www.youtube.com/shorts/4ZKaz29LizA
+[![JetBot AI Road Following](https://img.youtube.com/vi/4ZKaz29LizA/0.jpg)](https://www.youtube.com/watch?v=4ZKaz29LizA)
+
+https://www.youtube.com/shorts/7KwpsvUudrI
+
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Discussions](https://img.shields.io/github/discussions/NVIDIA-AI-IOT/jetbot)](https://github.com/NVIDIA-AI-IOT/jetbot/discussions)
 [![Jetson Forum](https://img.shields.io/badge/Forum-Jetson-green)](https://forums.developer.nvidia.com/c/agx-autonomous-machines/jetson-embedded-systems/70)
