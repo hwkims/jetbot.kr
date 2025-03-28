@@ -8,7 +8,8 @@ https://www.youtube.com/shorts/7KwpsvUudrI
 https://huggingface.co/datasets/kimhyunwoo/jetbot_road_nvidia/tree/main
 
 로드 데이터
-
+https://huggingface.co/kimhyunwoo/jetbot_road_following_nvidia/tree/main
+로드 팔로우 모델
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Discussions](https://img.shields.io/github/discussions/NVIDIA-AI-IOT/jetbot)](https://github.com/NVIDIA-AI-IOT/jetbot/discussions)
