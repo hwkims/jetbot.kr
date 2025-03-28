@@ -1,4 +1,16 @@
-```markdown
+
+![스크린샷(37)](https://github.com/user-attachments/assets/b01e5f85-dc76-4328-a7f2-0653081d14f0)
+
+![스크린샷(36)](https://github.com/user-attachments/assets/8b97ce55-8712-41ed-a554-4b7fbf698da9)
+
+![스크린샷(36)](https://github.com/user-attachments/assets/f012ce20-bdd9-4976-be1e-0ec7d82b59ac)
+![스크린샷(36)](https://github.com/user-attachments/assets/354cf5f5-75fc-43e3-9d79-d69d4bcf5e6a)
+
+ ![스크린샷(36)](https://github.com/user-attachments/assets/38e3887c-0aa7-4114-93d0-7d9b5d4efbbc)
+![스크린샷(36)](https://github.com/user-attachments/assets/cdcb7222-b146-4d85-99fc-f9855b8203c0)
+![스크린샷(36)](https://github.com/user-attachments/assets/3c0485c7-81a4-435d-b915-b232f4f9de2f)
+![스크린샷(36)](https://github.com/user-attachments/assets/671c660b-c8ab-44da-b053-8aa37de134ee)
+
 # JetBot 도로 주행 프로젝트: 데이터 수집부터 실시간 데모까지 (TensorRT 최적화 포함)
 
 ## 1. 프로젝트 개요
@@ -614,4 +626,4 @@ print("카메라 observe 해제 및 로봇 정지 완료.")
 ## 6. 결론
 
 본 문서는 JetBot을 이용한 도로 주행 프로젝트의 전체 과정을 다루었습니다. 데이터 수집, PyTorch 기반 모델 학습, TensorRT 최적화, 그리고 실시간 데모 구현 단계를 통해 JetBot이 카메라 이미지만으로 트랙을 따라 주행하는 기능을 구현할 수 있음을 보였습니다. 특히 TensorRT 최적화를 통해 임베디드 환경에서의 실시간 성능을 확보하는 것이 중요합니다. 사용자는 제공된 코드와 설명을 바탕으로 자신만의 주행 환경에 맞춰 데이터를 수집하고 모델을 개선하여 더 나은 주행 성능을 달성할 수 있습니다.
-```
+ 
