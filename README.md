@@ -5,6 +5,11 @@ https://www.youtube.com/shorts/4ZKaz29LizA
 
 https://www.youtube.com/shorts/7KwpsvUudrI
 
+https://huggingface.co/datasets/kimhyunwoo/jetbot_road_nvidia/tree/main
+
+로드 데이터
+
+
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Discussions](https://img.shields.io/github/discussions/NVIDIA-AI-IOT/jetbot)](https://github.com/NVIDIA-AI-IOT/jetbot/discussions)
 [![Jetson Forum](https://img.shields.io/badge/Forum-Jetson-green)](https://forums.developer.nvidia.com/c/agx-autonomous-machines/jetson-embedded-systems/70)
