@@ -6,10 +6,22 @@ https://www.youtube.com/shorts/4ZKaz29LizA
 https://www.youtube.com/shorts/7KwpsvUudrI
 
 https://huggingface.co/datasets/kimhyunwoo/jetbot_road_nvidia/tree/main
-
 로드 데이터
 https://huggingface.co/kimhyunwoo/jetbot_road_following_nvidia/tree/main
 로드 팔로우 모델
+
+
+
+https://huggingface.co/datasets/kimhyunwoo/jetbot_nvidia_cup_free
+컵라면 프리 블록 데이터
+
+https://huggingface.co/kimhyunwoo/jetbot_nvidia_cup_free/tree/main
+컵라면 팔로우 모델.
+컵라면 찾으면 직진
+못찾으면 회전.
+
+
+
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Discussions](https://img.shields.io/github/discussions/NVIDIA-AI-IOT/jetbot)](https://github.com/NVIDIA-AI-IOT/jetbot/discussions)
