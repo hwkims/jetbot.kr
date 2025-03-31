@@ -1,25 +1,36 @@
 # JetBot: NVIDIA Jetson Nano 기반 오픈소스 AI 로봇
 
-https://www.youtube.com/shorts/4ZKaz29LizA
-[![JetBot AI Road Following](https://img.youtube.com/vi/4ZKaz29LizA/0.jpg)](https://www.youtube.com/watch?v=4ZKaz29LizA)
 
-https://www.youtube.com/shorts/7KwpsvUudrI
+## JetBot Project Summaries
 
-https://huggingface.co/datasets/kimhyunwoo/jetbot_road_nvidia/tree/main
-로드 데이터
-https://huggingface.co/kimhyunwoo/jetbot_road_following_nvidia/tree/main
-로드 팔로우 모델
+JetBot을 활용한 두 가지 AI 프로젝트 관련 자료입니다.
 
+### 1. JetBot AI Road Following (도로 따라가기)
 
+*   **Video Demo (YouTube Short):**
+    [![JetBot AI Road Following](https://img.youtube.com/vi/4ZKaz29LizA/0.jpg)](https://www.youtube.com/watch?v=4ZKaz29LizA)
+    *(Short Link: https://www.youtube.com/shorts/4ZKaz29LizA)*
 
-https://huggingface.co/datasets/kimhyunwoo/jetbot_nvidia_cup_free
-컵라면 프리 블록 데이터
+*   **Dataset (도로 주행 데이터):** 📊
+    *   [https://huggingface.co/datasets/kimhyunwoo/jetbot_road_nvidia/tree/main](https://huggingface.co/datasets/kimhyunwoo/jetbot_road_nvidia/tree/main)
 
-https://huggingface.co/kimhyunwoo/jetbot_nvidia_cup_free/tree/main
-컵라면 팔로우 모델.
-컵라면 찾으면 직진
-못찾으면 회전.
+*   **Model (도로 주행 모델):** 🤖
+    *   [https://huggingface.co/kimhyunwoo/jetbot_road_following_nvidia/tree/main](https://huggingface.co/kimhyunwoo/jetbot_road_following_nvidia/tree/main)
 
+### 2. JetBot Cup Ramen Following (컵라면 따라가기)
+
+*   **Video Demo (YouTube Short):**
+    [![JetBot Cup Ramen Following](https://img.youtube.com/vi/7KwpsvUudrI/0.jpg)](https://www.youtube.com/watch?v=7KwpsvUudrI)
+    *(Short Link: https://www.youtube.com/shorts/7KwpsvUudrI)*
+
+*   **Dataset (컵라면 인식 데이터 - Free/Blocked):** 📊
+    *   [https://huggingface.co/datasets/kimhyunwoo/jetbot_nvidia_cup_free](https://huggingface.co/datasets/kimhyunwoo/jetbot_nvidia_cup_free)
+
+*   **Model (컵라면 따라가기 모델):** 🤖
+    *   [https://huggingface.co/kimhyunwoo/jetbot_nvidia_cup_free/tree/main](https://huggingface.co/kimhyunwoo/jetbot_nvidia_cup_free/tree/main)
+    *   *동작 방식:* 컵라면을 찾으면 직진, 못 찾으면 회전하며 탐색합니다.
+
+ 
 
 
 
