@@ -30,6 +30,24 @@ JetBot을 활용한 두 가지 AI 프로젝트 관련 자료입니다.
     *   [https://huggingface.co/kimhyunwoo/jetbot_nvidia_cup_free/tree/main](https://huggingface.co/kimhyunwoo/jetbot_nvidia_cup_free/tree/main)
     *   *동작 방식:* 컵라면을 찾으면 직진, 못 찾으면 회전하며 탐색합니다.
 
+### 3. JetBot Collision Avoidance (충돌 장애물 회피)
+
+*   **Video Demo (YouTube Short):**
+    [![JetBot Collision Avoidance](https://img.youtube.com/vi/fSZEXdUfQNo/0.jpg)](https://www.youtube.com/watch?v=fSZEXdUfQNo)
+    *(Short Link: https://www.youtube.com/shorts/fSZEXdUfQNo)*
+
+*   **Dataset (장애물 데이터 - Free/Blocked):** 📊
+    *   [https://huggingface.co/datasets/kimhyunwoo/nvidia_jetbot_cv_free_block](https://huggingface.co/datasets/kimhyunwoo/nvidia_jetbot_cv_free_block)
+
+*   **Model (장애물 회피 모델):** 🤖
+    *   [https://huggingface.co/kimhyunwoo/nvidia_jetbot_cv_model](https://huggingface.co/kimhyunwoo/nvidia_jetbot_cv_model)
+    *   *동작 방식:* 장애물이 앞에 있으면 회전, 못 찾으면 직진하며 탐색합니다.
+
+
+
+
+
+
  
 
 
