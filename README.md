@@ -1,4 +1,4 @@
-# JetBot: NVIDIA Jetson Nano 기반 오픈소스 AI 로봇
+![스크린샷(61)](https://github.com/user-attachments/assets/9be17fcd-fb68-430a-b1ba-ba180e38a040)# JetBot: NVIDIA Jetson Nano 기반 오픈소스 AI 로봇
 
 
 ## JetBot Project Summaries
@@ -102,3 +102,20 @@ JetBot은 NVIDIA Jetson Nano를 기반으로 하는 저렴하고 교육적이며
 ## 라이선스
 
 JetBot은 MIT 라이선스에 따라 배포됩니다.  자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+![스크린샷(55)](https://github.com/user-attachments/assets/5e22e9ae-182c-4a77-878c-3b960904e0a1)
+
+ ![스크린샷(56)](https://github.com/user-attachments/assets/6ada874d-9021-463b-8803-76222415aed3)
+
+![스크린샷(57)](https://github.com/user-attachments/assets/eb386456-714d-461c-b8a8-d8d3ce107c78)
+
+![스크린샷(58)](https://github.com/user-attachments/assets/5e15e626-8352-4c77-80f8-c9706c06a095)
+
+![스크린샷(59)](https://github.com/user-attachments/assets/655e7708-5c61-4d1a-bb6b-30f0160eaec7)
+
+![스크린샷(60)](https://github.com/user-attachments/assets/8281aa53-751d-45ac-bc96-3094accf3804)
+
+ 
+![스크린샷(61)](https://github.com/user-attachments/assets/7a4dff39-f2e4-449e-a931-1f9523446138)
+
+
+
