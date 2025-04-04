@@ -102,6 +102,20 @@ JetBot은 NVIDIA Jetson Nano를 기반으로 하는 저렴하고 교육적이며
 ## 라이선스
 
 JetBot은 MIT 라이선스에 따라 배포됩니다.  자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+ 
+![스크린샷(47)](https://github.com/user-attachments/assets/4bfbae0d-72db-4e7e-a7d1-37cf0f71dd5d)
+
+![스크린샷(50)](https://github.com/user-attachments/assets/b7032edb-6142-4f82-813b-bd6c241a3434)
+
+![스크린샷(51)](https://github.com/user-attachments/assets/640a6971-3b6c-4e8a-95bf-e1e61a81f0ff)
+
+![스크린샷(52)](https://github.com/user-attachments/assets/170fafa5-f6b1-42bb-9daf-d5e2cc39cc81)
+
+![스크린샷(53)](https://github.com/user-attachments/assets/bfd2cc28-e978-4c7c-8747-c2ea6050a27d)
+
+
+![스크린샷(54)](https://github.com/user-attachments/assets/2c56d425-501c-4b1f-86e5-c7ea2ff6280b)
+
 ![스크린샷(55)](https://github.com/user-attachments/assets/5e22e9ae-182c-4a77-878c-3b960904e0a1)
 
  ![스크린샷(56)](https://github.com/user-attachments/assets/6ada874d-9021-463b-8803-76222415aed3)
