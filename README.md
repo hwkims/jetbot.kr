@@ -1,5 +1,6 @@
 ![스크린샷(61)](https://github.com/user-attachments/assets/9be17fcd-fb68-430a-b1ba-ba180e38a040)# JetBot: NVIDIA Jetson Nano 기반 오픈소스 AI 로봇
 
+https://docs.google.com/presentation/d/1BvbKuTApiZ13GjLVXmczfvaMWzqVicsF/edit?slide=id.p7#slide=id.p7
 
 ## JetBot Project Summaries
 
